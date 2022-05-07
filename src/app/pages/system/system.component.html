@@ -1,0 +1,140 @@
+<form class="container mt-3">
+    <!-- DATOS DEL CLIENTE -->
+    <!-- DATOS DEL CLIENTE -->
+    <!-- DATOS DEL CLIENTE -->
+    <div class="row border rounded p-3 mb-3">
+        <h3 class="text-center text-secondary mb-3">DATOS DEL CLIENTE</h3>
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Nombre">
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Apellido">
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Telefono">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Dirección">
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Email">
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <input class="form-control" placeholder="Compañia">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PEDIDO -->
+    <!-- PEDIDO -->
+    <!-- PEDIDO -->
+    <div class="row border rounded p-3 mb-3">
+        <h3 class="text-center text-secondary mb-3">PEDIDO</h3>
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-3 mb-3">
+                    <select name="description" class="form-select" [(ngModel)]="orderType">
+                        <option selected value="vinyl">Vinilo</option>
+                        <option value="banner">Lona</option>
+                        <option value="neon">Neon</option>
+                        <option value="polifan">Polifan</option>
+                        <option value="mix">Mixto</option>
+                        <option value="other">Otros</option>
+                    </select>
+                </div>
+                <!-- VINYL -->
+                <div class="col-lg-9" [ngSwitch]="orderType">
+                    <div class="row" *ngSwitchCase="'vinyl'">
+                        <div class="col-lg-2 mb-3">
+                            <select name="description" class="form-select">
+                                <option selected value="">Impreso</option>
+                                <option value="">Corte</option>
+                                <option value="">Mixto</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select name="description" class="form-select">
+                                <option selected value="">Glossy</option>
+                                <option value="">Mate</option>
+                                <option value="">Microperforado</option>
+                                <option value="">Esmerilado</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Alto">
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Ancho">
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Servicio</option>
+                                <option>Sin Instalar</option>
+                                <option>Instalar</option>
+                                <option>Remover/Instalar</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Adicionales</option>
+                                <option>Sin Adicional</option>
+                                <option>Alto Impacto</option>
+                                <option>Vidrio</option>
+                                <option>Pvc</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="description">
+                <div class="col">
+                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"placeholder="Descripción"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center m-3">
+                    <div class="btn btn-dark mx-1" (click)="openDescription()"><i class="fa-solid fa-pencil"></i></div>
+                    <div class="btn btn-dark mx-1"><i class="fa-solid fa-plus"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PAGO  -->
+    <!-- PAGO  -->
+    <!-- PAGO  -->
+    <div class="row border rounded p-3 mb-3">
+        <h3 class="text-center text-secondary mb-3">PAGO</h3>
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="amount" placeholder="Costo Total">
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="col input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="warranty" placeholder="Anticipo">
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="col input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control" id="balance" placeholder="Saldo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row border rounded">
+        <div class="col text-center m-3">
+            <button type="submit" class="btn btn-success mx-1">Confirmar</button>
+            <button class="btn btn-danger mx-1">Descartar</button>
+        </div>
+    </div>
+</form>
