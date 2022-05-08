@@ -8,8 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class SystemComponent implements OnInit {
 
-  orderType: any = ''
-  description: boolean = false
+ 
 
   form: FormGroup = new FormGroup({});
 
@@ -18,8 +17,6 @@ export class SystemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDescription(){
-    this.description === false ? this.description = true : this.description = false
-  }
+
 
 }
