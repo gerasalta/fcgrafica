@@ -1,4 +1,4 @@
-<form class="container mt-3">
+<form class="container mt-3" [formGroup]="clientData" (ngSubmit)="logData()">
     <!-- DATOS DEL CLIENTE -->
     <!-- DATOS DEL CLIENTE -->
     <!-- DATOS DEL CLIENTE -->
@@ -7,24 +7,24 @@
         <div class="col">
             <div class="row">
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Nombre">
+                    <input class="form-control" formControlName="name" placeholder="Nombre">
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Apellido">
+                    <input class="form-control" formControlName="lastName" placeholder="Apellido">
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Telefono">
+                    <input class="form-control" formControlName="phone" placeholder="Telefono">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Dirección">
+                    <input class="form-control" formControlName="address" placeholder="Dirección">
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Email">
+                    <input class="form-control" formControlName="email" placeholder="Email">
                 </div>
                 <div class="col-lg-4 mb-3">
-                    <input class="form-control" placeholder="Compañia">
+                    <input class="form-control" formControlName="company" placeholder="Compañia">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
     </div>
     <div class="row border rounded">
         <div class="col text-center m-3">
-            <button type="submit" class="btn btn-success mx-1">Confirmar</button>
+            <button [disabled]="" type="submit" class="btn btn-success mx-1">Confirmar</button>
             <button class="btn btn-danger mx-1">Descartar</button>
         </div>
     </div>

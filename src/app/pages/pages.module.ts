@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SystemComponent } from './system/system.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
+import { formComponent } from './form/form.component';
 
 
 
 @NgModule({
   declarations: [
-    SystemComponent
+    formComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   exports: [
-    SystemComponent
+    formComponent
   ]
 })
 export class PagesModule { }
