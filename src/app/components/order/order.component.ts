@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -10,7 +11,8 @@ export class OrderComponent implements OnInit {
   orderType: any = 'vinyl'
   description: boolean = false
 
-  constructor() { }
+
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +20,5 @@ export class OrderComponent implements OnInit {
   openDescription(){
     this.description === false ? this.description = true : this.description = false
   }
-
+  
 }

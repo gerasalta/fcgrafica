@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,13 +8,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class formComponent implements OnInit {
 
- clientData:  FormGroup = new FormGroup({
-  name: new FormControl('', Validators.required),
-  lastName: new FormControl('', Validators.required),
-  phone: new FormControl('', (Validators.required, Validators.minLength(10))),
-  email: new FormControl('', Validators.email),
-  address: new FormControl(''),
-  company: new FormControl(''),
+ orderData:  FormGroup = new FormGroup({
+  clientData: new FormGroup({
+    name: new FormControl('', Validators.required),
+    lastName: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl(''),
+    email: new FormControl(''),
+    company: new FormControl(''),
+  }),
+  balanceData: new FormGroup({
+    amount: new FormControl('',Validators.required),
+    warranty: new FormControl('',Validators.required),
+    balance: new FormControl('',Validators.required),
+  })
  }) 
 
   constructor() { }
@@ -22,8 +29,8 @@ export class formComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  logData(){
-    console.log(this.clientData.value);
+  sendData(){
+    console.log(this.orderData.value);
   }
 
 
