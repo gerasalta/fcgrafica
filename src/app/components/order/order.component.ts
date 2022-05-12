@@ -11,8 +11,7 @@ export class OrderComponent implements OnInit {
   orderType: any = 'vinyl'
   description: boolean = false
 
-
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -21,4 +20,6 @@ export class OrderComponent implements OnInit {
     this.description === false ? this.description = true : this.description = false
   }
   
+  addOrder(){
+  }
 }

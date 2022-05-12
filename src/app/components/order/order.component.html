@@ -1,107 +1,105 @@
 <div class="row border rounded p-3 mb-3">
     <h3 class="text-center text-secondary mb-3">PEDIDO</h3>
-    <div class="col">
-        <div class="row">
-            <div class="col-lg-3 mb-3">
-                <select name="material" class="form-select" [(ngModel)]="orderType">
-                    <option selected value="vinyl">Vinilo</option>
-                    <option value="banner">Lona</option>
-                    <option value="neon">Neon</option>
-                    <option value="polifan">Polifan</option>
-                    <option value="mix">Mixto</option>
-                    <option value="other">Otros</option>
-                </select>
-            </div>
-            <!-- VINYL -->
-            <div class="col-lg-9" [ngSwitch]="orderType">
-                <div class="row" *ngSwitchCase="'vinyl'">
-                    <div class="col-lg-2 mb-3">
-                        <select name="type" class="form-select">
-                            <option selected value="">Impreso</option>
-                            <option value="">Corte</option>
-                        </select>
+        <div class="col">
+            <div class="row">
+                <div class="col-lg-3 mb-3">
+                    <select name="material" class="form-select" [(ngModel)]="orderType">
+                        <option selected value="vinyl">Vinilo</option>
+                        <option value="banner">Lona</option>
+                        <option value="neon">Neon</option>
+                        <option value="polifan">Polifan</option>
+                        <option value="mix">Mixto</option>
+                        <option value="other">Otros</option>
+                    </select>
+                </div>
+                <!-- VINYL -->
+                <div class="col-lg-9" [ngSwitch]="orderType">
+                    <div class="row" *ngSwitchCase="'vinyl'">
+                        <div class="col-lg-2 mb-3">
+                            <select name="type" class="form-select">
+                                <option selected value="">Impreso</option>
+                                <option value="">Corte</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select name="description" class="form-select">
+                                <option selected value="">Brillante</option>
+                                <option value="">Mate</option>
+                                <option value="">Microperforado</option>
+                                <option value="">Esmerilado</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Alto">
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Ancho">
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Adicionales</option>
+                                <option>Sin Adicional</option>
+                                <option>Alto Impacto</option>
+                                <option>Vidrio</option>
+                                <option>Pvc</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Servicio</option>
+                                <option>Sin Instalar</option>
+                                <option>Instalar</option>
+                                <option>Remover/Instalar</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-lg-2 mb-3">
-                        <select name="description" class="form-select">
-                            <option selected value="">Brillante</option>
-                            <option value="">Mate</option>
-                            <option value="">Microperforado</option>
-                            <option value="">Esmerilado</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 col-6 mb-3">
-                        <input class="form-control" placeholder="Alto">
-                    </div>
-                    <div class="col-lg-2 col-6 mb-3">
-                        <input class="form-control" placeholder="Ancho">
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <select class="form-select">
-                            <option selected disabled value="">Adicionales</option>
-                            <option>Sin Adicional</option>
-                            <option>Alto Impacto</option>
-                            <option>Vidrio</option>
-                            <option>Pvc</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <select class="form-select">
-                            <option selected disabled value="">Servicio</option>
-                            <option>Sin Instalar</option>
-                            <option>Instalar</option>
-                            <option>Remover/Instalar</option>
-                        </select>
+                    <!-- BANNER -->
+                    <div class="row" *ngSwitchCase="'banner'">
+                        <div class="col-lg-3 mb-3">
+                            <select class="form-select">
+                                <option>Simple</option>
+                                <option>C/ Hojales</option>
+                                <option>Bolsillos</option>
+                                <option>Una Vela</option>
+                                <option>Dos Velas</option>
+                                <option>Roll Up</option>
+                                <option>Estructural</option>
+                                <option>Luminoso</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select name="description" class="form-select">
+                                <option selected value="">Brillante</option>
+                                <option value="">Mate</option>
+                                <option value="">Back</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Alto">
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="Ancho">
+                        </div>
+                        <div class="col-lg-3 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Servicio</option>
+                                <option>Sin Instalar</option>
+                                <option>Instalar</option>
+                                <option>Remover/Instalar</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <!-- BANNER -->
-                <div class="row" *ngSwitchCase="'banner'">
-                    <div class="col-lg-3 mb-3">
-                        <select class="form-select">
-                            <option>Simple</option>
-                            <option>C/ Hojales</option>
-                            <option>Bolsillos</option>
-                            <option>Una Vela</option>
-                            <option>Dos Velas</option>
-                            <option>Roll Up</option>
-                            <option>Estructural</option>
-                            <option>Luminoso</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 mb-3">
-                        <select name="description" class="form-select">
-                            <option selected value="">Brillante</option>
-                            <option value="">Mate</option>
-                            <option value="">Back</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-2 col-6 mb-3">
-                        <input class="form-control" placeholder="Alto">
-                    </div>
-                    <div class="col-lg-2 col-6 mb-3">
-                        <input class="form-control" placeholder="Ancho">
-                    </div>
-                    <div class="col-lg-3 mb-3">
-                        <select class="form-select">
-                            <option selected disabled value="">Servicio</option>
-                            <option>Sin Instalar</option>
-                            <option>Instalar</option>
-                            <option>Remover/Instalar</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="row" *ngIf="description">
+                <div class="col">
+                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Descripción"></textarea>
                 </div>
             </div>
-        </div>
-        <div class="row" *ngIf="description">
-            <div class="col">
-                <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Descripción"></textarea>
+            <div class="col text-center m-3">
+                <button type="button" class="btn btn-dark mx-1" (click)="openDescription()"><i class="fa-solid fa-pencil"></i></button>
+                <button type="button" class="btn btn-dark mx-1" (click)="addOrder()"><i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
-    </div>
-<div class="row">
-    <div class="col text-center m-3">
-        <button class="btn btn-dark mx-1" (click)="openDescription()"><i class="fa-solid fa-pencil"></i></button>
-        <button class="btn btn-dark mx-1"><i class="fa-solid fa-plus"></i></button>
-    </div>
-</div>
 </div>
