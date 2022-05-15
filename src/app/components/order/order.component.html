@@ -1,28 +1,27 @@
-<div class="row border rounded p-3 mb-3">
+<div class="row border rounded p-3 mb-3" [formGroup]="form">
     <h3 class="text-center text-secondary mb-3">PEDIDO</h3>
-        <div class="col">
-            <div class="row">
+    <div class="col">
+        <ng-container formArrayName="arrOrders" *ngFor="let order of orders?.controls; let i = index">
+            <div class="row" [formGroupName]="i">
                 <div class="col-lg-3 mb-3">
-                    <select name="material" class="form-select" [(ngModel)]="orderType">
+                    <select name="material" class="form-select" formControlName="material">
                         <option selected value="vinyl">Vinilo</option>
                         <option value="banner">Lona</option>
-                        <option value="neon">Neon</option>
+                        <option value="light">Luces</option>
                         <option value="polifan">Polifan</option>
-                        <option value="mix">Mixto</option>
-                        <option value="other">Otros</option>
                     </select>
                 </div>
                 <!-- VINYL -->
-                <div class="col-lg-9" [ngSwitch]="orderType">
+                <div class="col-lg-9" [ngSwitch]="order.get('material')?.value">
                     <div class="row" *ngSwitchCase="'vinyl'">
                         <div class="col-lg-2 mb-3">
-                            <select name="type" class="form-select">
+                            <select name="plotter" class="form-select" formControlName="plotter">
                                 <option selected value="">Impreso</option>
                                 <option value="">Corte</option>
                             </select>
                         </div>
                         <div class="col-lg-2 mb-3">
-                            <select name="description" class="form-select">
+                            <select name="description" class="form-select" formControlName="type">
                                 <option selected value="">Brillante</option>
                                 <option value="">Mate</option>
                                 <option value="">Microperforado</option>
@@ -30,13 +29,13 @@
                             </select>
                         </div>
                         <div class="col-lg-2 col-6 mb-3">
-                            <input class="form-control" placeholder="Alto">
+                            <input class="form-control" placeholder="Alto" formControlName="height">
                         </div>
                         <div class="col-lg-2 col-6 mb-3">
-                            <input class="form-control" placeholder="Ancho">
+                            <input class="form-control" placeholder="Ancho"  formControlName="width">
                         </div>
                         <div class="col-lg-2 mb-3">
-                            <select class="form-select">
+                            <select class="form-select"  formControlName="additionalMaterial">
                                 <option selected disabled value="">Adicionales</option>
                                 <option>Sin Adicional</option>
                                 <option>Alto Impacto</option>
@@ -45,7 +44,7 @@
                             </select>
                         </div>
                         <div class="col-lg-2 mb-3">
-                            <select class="form-select">
+                            <select class="form-select" formControlName="additionalService">
                                 <option selected disabled value="">Servicio</option>
                                 <option>Sin Instalar</option>
                                 <option>Instalar</option>
@@ -89,17 +88,55 @@
                             </select>
                         </div>
                     </div>
+                    <!-- NEON -->
+                    <div class="row" *ngSwitchCase="'light'">
+                        <div class="col-lg-3 mb-3">
+                            <select name="type" class="form-select">
+                                <option>Neon</option>
+                                <option>Led</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select name="colour" class="form-select">
+                                <option value="">Blanco</option>
+                                <option value="">Rojo</option>
+                                <option value="">Azul</option>
+                                <option value="">Rosa</option>
+                                <option value="">Amarillo</option>
+                                <option value="">Fuxia</option>
+                                <option value="">Verde</option>
+                                <option value="">Morado</option>
+                                <option value="">Varios</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 col-6 mb-3">
+                            <input class="form-control" placeholder="metros">
+                        </div>
+                        <div class="col-lg-3 mb-3">
+                            <select class="form-select">
+                                <option selected disabled value="">Servicio</option>
+                                <option>Sin Instalar</option>
+                                <option>Instalar</option>
+                                <option>Remover/Instalar</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="row" *ngIf="description">
-                <div class="col">
-                    <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
-                        placeholder="Descripción"></textarea>
-                </div>
-            </div>
-            <div class="col text-center m-3">
-                <button type="button" class="btn btn-dark mx-1" (click)="openDescription()"><i class="fa-solid fa-pencil"></i></button>
-                <button type="button" class="btn btn-dark mx-1" (click)="addOrder()"><i class="fa-solid fa-plus"></i></button>
+        </ng-container>
+        <div class="row" *ngIf="description">
+            <div class="col">
+                <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
+                    placeholder="Descripción"></textarea>
             </div>
         </div>
+        <div class="row">
+            <div class="col text-center m-3">
+                <button type="button" class="btn btn-dark mx-1" (click)="openDescription()"><i
+                        class="fa-solid fa-pencil"></i></button>
+                <button type="button" class="btn btn-dark mx-1" (click)="addOrder()"><i
+                        class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
 </div>
