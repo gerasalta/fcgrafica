@@ -8,7 +8,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class formComponent implements OnInit {
 
- orderData:  FormGroup = new FormGroup({
+ form:  FormGroup = new FormGroup({
   clientData: new FormGroup({
     name: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -16,6 +16,8 @@ export class formComponent implements OnInit {
     address: new FormControl(''),
     email: new FormControl(''),
     company: new FormControl(''),
+  }),
+  orderData: new FormGroup({
   }),
   balanceData: new FormGroup({
     amount: new FormControl('',Validators.required),
@@ -30,8 +32,7 @@ export class formComponent implements OnInit {
   }
 
   sendData(){
-    console.log(this.orderData.value);
+    console.log(this.form.value);
   }
-
 
 }

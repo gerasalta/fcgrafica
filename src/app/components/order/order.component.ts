@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -12,16 +12,20 @@ export class OrderComponent implements OnInit {
 		arrOrders: new FormArray([])
 	});
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
-	description: boolean = false;
+	showDescription: boolean = false;
+
+	get disabledDelete (){
+		return this.orders.controls.length <= 1
+	}
 
 	constructor() { }
 
 	ngOnInit(): void {
-		this.addOrder()
+		this.addOrder();
 	}
 
 	openDescription() {
-		this.description === false ? this.description = true : this.description = false
+		this.showDescription === false ? this.showDescription = true : this.showDescription = false
 	}
 
 	addOrder() {
@@ -32,9 +36,14 @@ export class OrderComponent implements OnInit {
 			height: new FormControl(''),
 			width: new FormControl(''),
 			additionalMaterial: new FormControl(''),
-			additionalService: new FormControl('')
+			additionalService: new FormControl(''),
+			description: new FormControl(''),
 		});
 		this.orders?.controls.push(newOrder);
 	}
 
+	deleteOrder(index: number) {
+		this.orders.controls.splice(index, 1)
+	}
+	
 }

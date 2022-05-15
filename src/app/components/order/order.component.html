@@ -8,7 +8,7 @@
                         <option selected value="vinyl">Vinilo</option>
                         <option value="banner">Lona</option>
                         <option value="light">Luces</option>
-                        <option value="polifan">Polifan</option>
+                        <option value="polyfan">Polifan</option>
                     </select>
                 </div>
                 <!-- VINYL -->
@@ -28,35 +28,36 @@
                                 <option value="">Esmerilado</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-6 mb-3">
+                        <div class="col-lg-1 col-6 mb-3">
                             <input class="form-control" placeholder="Alto" formControlName="height">
                         </div>
-                        <div class="col-lg-2 col-6 mb-3">
+                        <div class="col-lg-1 col-6 mb-3">
                             <input class="form-control" placeholder="Ancho"  formControlName="width">
                         </div>
                         <div class="col-lg-2 mb-3">
                             <select class="form-select"  formControlName="additionalMaterial">
-                                <option selected disabled value="">Adicionales</option>
-                                <option>Sin Adicional</option>
+                                <option selected value="" >Sin Adicional</option>
                                 <option>Alto Impacto</option>
                                 <option>Vidrio</option>
                                 <option>Pvc</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 mb-3">
+                        <div class="col-lg-3 mb-3">
                             <select class="form-select" formControlName="additionalService">
-                                <option selected disabled value="">Servicio</option>
-                                <option>Sin Instalar</option>
+                                <option selected value="" >Sin Instalar</option>
                                 <option>Instalar</option>
                                 <option>Remover/Instalar</option>
                             </select>
                         </div>
+                        <div  class="col-lg-1 mb-3">
+                            <button [disabled]="disabledDelete" type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
                     </div>
                     <!-- BANNER -->
                     <div class="row" *ngSwitchCase="'banner'">
-                        <div class="col-lg-3 mb-3">
+                        <div class="col-lg-2 mb-3">
                             <select class="form-select">
-                                <option>Simple</option>
+                                <option selected value="" >Simple</option>
                                 <option>C/ Hojales</option>
                                 <option>Bolsillos</option>
                                 <option>Una Vela</option>
@@ -81,22 +82,27 @@
                         </div>
                         <div class="col-lg-3 mb-3">
                             <select class="form-select">
-                                <option selected disabled value="">Servicio</option>
-                                <option>Sin Instalar</option>
-                                <option>Instalar</option>
+                                <option selected value="">Sin Instalar</option>
+                                <option selected value="">Instalar</option>
                                 <option>Remover/Instalar</option>
                             </select>
+                        </div>
+                        <div  class="col-lg-1 mb-3">
+                            <button [disabled]="disabledDelete" type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </div>
                     <!-- NEON -->
                     <div class="row" *ngSwitchCase="'light'">
                         <div class="col-lg-3 mb-3">
                             <select name="type" class="form-select">
-                                <option>Neon</option>
+                                <option selected value="" >Neon</option>
                                 <option>Led</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 mb-3">
+                        <div class="col-lg-4 col-6 mb-3">
+                            <input class="form-control" placeholder="metros">
+                        </div>
+                        <div class="col-lg-4 mb-3">
                             <select name="colour" class="form-select">
                                 <option value="">Blanco</option>
                                 <option value="">Rojo</option>
@@ -109,33 +115,43 @@
                                 <option value="">Varios</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col-6 mb-3">
-                            <input class="form-control" placeholder="metros">
+                        <div  class="col-lg-1 mb-3">
+                            <button [disabled]="disabledDelete" type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
-                        <div class="col-lg-3 mb-3">
-                            <select class="form-select">
-                                <option selected disabled value="">Servicio</option>
-                                <option>Sin Instalar</option>
-                                <option>Instalar</option>
-                                <option>Remover/Instalar</option>
+                    </div>
+                    <!-- POLIFAN -->
+                    <div class="row" *ngSwitchCase="'polyfan'">
+                        <div class="col-lg-4 mb-3">
+                            <select name="type" class="form-select">
+                                <option>Cons. Final</option>
+                                <option>Gremio</option>
                             </select>
+                        </div>
+                        <div class="col-lg-3 col mb-3">
+                            <input class="form-control" placeholder="placas">
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                            <select class="form-select">
+                                <option selected >Sin Instalar</option>
+                                <option>Instalar</option>
+                            </select>
+                        </div>
+                        <div  class="col-lg-1 mb-3">
+                            <button [disabled]="disabledDelete" type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </ng-container>
-        <div class="row" *ngIf="description">
+        <div class="row" *ngIf="showDescription">
             <div class="col">
-                <textarea class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Descripción"></textarea>
+                <textarea formControlName="description" class="form-control mb-3" id="exampleFormControlTextarea1" rows="3"placeholder="Descripción"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col text-center m-3">
-                <button type="button" class="btn btn-dark mx-1" (click)="openDescription()"><i
-                        class="fa-solid fa-pencil"></i></button>
-                <button type="button" class="btn btn-dark mx-1" (click)="addOrder()"><i
-                        class="fa-solid fa-plus"></i></button>
+                <button type="button" class="btn btn-dark mx-1" (click)="openDescription()"><i class="fa-solid fa-pencil"></i></button>
+                <button type="button" class="btn btn-dark mx-1" (click)="addOrder()"><i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
     </div>
