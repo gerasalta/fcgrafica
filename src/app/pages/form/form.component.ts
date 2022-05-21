@@ -35,4 +35,8 @@ export class formComponent implements OnInit {
     console.log(this.form.value);
   }
 
+  getData(data: any){
+    this.form.setControl('orderData', data)
+  }
+  
 }

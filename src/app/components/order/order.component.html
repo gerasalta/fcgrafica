@@ -5,7 +5,7 @@
             <div class="row" [formGroupName]="i">
                 <div class="col-lg-3 mb-3">
                     <select name="material" class="form-select" formControlName="material">
-                        <option selected value="vinyl">Vinilo</option>
+                        <option value="vinyl">Vinilo</option>
                         <option value="banner">Lona</option>
                         <option value="light">Luces</option>
                         <option value="polyfan">Polifan</option>
@@ -16,37 +16,30 @@
                     <div class="row" *ngSwitchCase="'vinyl'">
                         <div class="col-lg-2 mb-3">
                             <select name="plotter" class="form-select" formControlName="plotter">
-                                <option selected value="">Impreso</option>
-                                <option value="">Corte</option>
+                                <option value="print">Impreso</option>
+                                <option value="cut">Corte</option>
+                                <option value="mix">Mixto</option>
                             </select>
                         </div>
                         <div class="col-lg-2 mb-3">
-                            <select name="description" class="form-select" formControlName="type">
-                                <option selected value="">Brillante</option>
-                                <option value="">Mate</option>
-                                <option value="">Microperforado</option>
-                                <option value="">Esmerilado</option>
+                            <select name="description" class="form-select" formControlName="materialType">
+                                <option selected value="glossy">Brillante</option>
+                                <option value="mate">Mate</option>
+                                <option value="perforated">Microperforado</option>
+                                <option value="frosted">Esmerilado</option>
                             </select>
                         </div>
-                        <div class="col-lg-1 col-6 mb-3">
+                        <div class="col-lg-2 col-6 mb-3">
                             <input class="form-control" placeholder="Alto" formControlName="height">
                         </div>
-                        <div class="col-lg-1 col-6 mb-3">
+                        <div class="col-lg-2 col-6 mb-3">
                             <input class="form-control" placeholder="Ancho"  formControlName="width">
-                        </div>
-                        <div class="col-lg-2 mb-3">
-                            <select class="form-select"  formControlName="additionalMaterial">
-                                <option selected value="" >Sin Adicional</option>
-                                <option>Alto Impacto</option>
-                                <option>Vidrio</option>
-                                <option>Pvc</option>
-                            </select>
                         </div>
                         <div class="col-lg-3 mb-3">
                             <select class="form-select" formControlName="additionalService">
-                                <option selected value="" >Sin Instalar</option>
-                                <option>Instalar</option>
-                                <option>Remover/Instalar</option>
+                                <option selected value="justMaterial" >Sin Instalar</option>
+                                <option value="install">Instalar</option>
+                                <option value="removeInstall">Remover/Instalar</option>
                             </select>
                         </div>
                         <div  class="col-lg-1 mb-3">
@@ -56,35 +49,35 @@
                     <!-- BANNER -->
                     <div class="row" *ngSwitchCase="'banner'">
                         <div class="col-lg-2 mb-3">
-                            <select class="form-select">
-                                <option selected value="" >Simple</option>
-                                <option>C/ Hojales</option>
-                                <option>Bolsillos</option>
-                                <option>Una Vela</option>
-                                <option>Dos Velas</option>
-                                <option>Roll Up</option>
-                                <option>Estructural</option>
-                                <option>Luminoso</option>
+                            <select class="form-select" formControlName="additionalMaterial">
+                                <option selected value="justMaterial">Simple</option>
+                                <option value="eyelets">C/ Hojales</option>
+                                <option value="hangingBanner">Bolsillos</option>
+                                <option value="tensioner">Tensor</option>
+                                <option value="oubleTensioner">Doble Tensor</option>
+                                <option value="rollUp">Roll Up</option>
+                                <option value="structuralIron">Estructural</option>
+                                <option value="bright">Luminoso</option>
                             </select>
                         </div>
                         <div class="col-lg-2 mb-3">
-                            <select name="description" class="form-select">
-                                <option selected value="">Brillante</option>
-                                <option value="">Mate</option>
-                                <option value="">Back</option>
+                            <select name="description" class="form-select" formControlName="materialType">
+                                <option selected value="glossy">Brillante</option>
+                                <option value="mate">Mate</option>
+                                <option value="back">Back</option>
                             </select>
                         </div>
                         <div class="col-lg-2 col-6 mb-3">
-                            <input class="form-control" placeholder="Alto">
+                            <input class="form-control" placeholder="Alto" formControlName="height">
                         </div>
                         <div class="col-lg-2 col-6 mb-3">
-                            <input class="form-control" placeholder="Ancho">
+                            <input class="form-control" placeholder="Ancho" formControlName="width">
                         </div>
                         <div class="col-lg-3 mb-3">
-                            <select class="form-select">
-                                <option selected value="">Sin Instalar</option>
-                                <option selected value="">Instalar</option>
-                                <option>Remover/Instalar</option>
+                            <select class="form-select" formControlName="additionalService">
+                                <option selected value="just-material">Sin Instalar</option>
+                                <option selected value="install">Instalar</option>
+                                <option value="remove-install">Remover/Instalar</option>
                             </select>
                         </div>
                         <div  class="col-lg-1 mb-3">
@@ -94,25 +87,25 @@
                     <!-- NEON -->
                     <div class="row" *ngSwitchCase="'light'">
                         <div class="col-lg-3 mb-3">
-                            <select name="type" class="form-select">
-                                <option selected value="" >Neon</option>
-                                <option>Led</option>
+                            <select name="type" class="form-select" formControlName="materialType">
+                                <option selected value="neon" >Neon</option>
+                                <option value="led">Led</option>
                             </select>
                         </div>
                         <div class="col-lg-4 col-6 mb-3">
-                            <input class="form-control" placeholder="metros">
+                            <input class="form-control" placeholder="metros" formControlName="meters">
                         </div>
                         <div class="col-lg-4 mb-3">
-                            <select name="colour" class="form-select">
-                                <option value="">Blanco</option>
-                                <option value="">Rojo</option>
-                                <option value="">Azul</option>
-                                <option value="">Rosa</option>
-                                <option value="">Amarillo</option>
-                                <option value="">Fuxia</option>
-                                <option value="">Verde</option>
-                                <option value="">Morado</option>
-                                <option value="">Varios</option>
+                            <select name="colour" class="form-select" formControlName="colours">
+                                <option value="white">Blanco</option>
+                                <option value="red">Rojo</option>
+                                <option value="blue">Azul</option>
+                                <option value="pink">Rosa</option>
+                                <option value="yellow">Amarillo</option>
+                                <option value="fuxia">Fuxia</option>
+                                <option value="green">Verde</option>
+                                <option value="purple">Morado</option>
+                                <option value="mix">Varios</option>
                             </select>
                         </div>
                         <div  class="col-lg-1 mb-3">
@@ -121,19 +114,34 @@
                     </div>
                     <!-- POLIFAN -->
                     <div class="row" *ngSwitchCase="'polyfan'">
-                        <div class="col-lg-4 mb-3">
-                            <select name="type" class="form-select">
-                                <option>Cons. Final</option>
-                                <option>Gremio</option>
+                        <div class="col-lg-3 mb-3">
+                            <select name="type" class="form-select" formControlName="clientType">
+                                <option value="finalConsumer">Cons. Final</option>
+                                <option value="guild">Gremio</option>
                             </select>
                         </div>
-                        <div class="col-lg-3 col mb-3">
-                            <input class="form-control" placeholder="placas">
+                        <div class="col-lg-2 mb-3">
+                            <select name="type" class="form-select" formControlName="thickness">
+                                <option value="20">20mm</option>
+                                <option value="25">25mm</option>
+                                <option value="30">30mm</option>
+                                <option value="40">40mm</option>
+                                <option value="50">50mm</option>
+                            </select>
                         </div>
-                        <div class="col-lg-4 mb-3">
-                            <select class="form-select">
-                                <option selected >Sin Instalar</option>
-                                <option>Instalar</option>
+                        <div class="col-lg-2 col mb-3">
+                            <input class="form-control" placeholder="unidades" formControlName="units">
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select" formControlName="print">
+                                <option value="yes" selected >Sin Pintura</option>
+                                <option value="no">Pintura</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2 mb-3">
+                            <select class="form-select" formControlName="additionalService">
+                                <option value="withoutInstall" selected >Sin Instalar</option>
+                                <option value="install">Instalar</option>
                             </select>
                         </div>
                         <div  class="col-lg-1 mb-3">

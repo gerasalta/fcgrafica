@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-order',
@@ -8,8 +8,10 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 })
 export class OrderComponent implements OnInit {
 
+	@Output() emitter = new EventEmitter();
 	form: FormGroup = new FormGroup({
-		arrOrders: new FormArray([])
+		arrOrders: new FormArray([]),
+		description: new FormControl('')
 	});
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
 	showDescription: boolean = false;
@@ -22,6 +24,7 @@ export class OrderComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.addOrder();
+		this.send();
 	}
 
 	openDescription() {
@@ -30,20 +33,31 @@ export class OrderComponent implements OnInit {
 
 	addOrder() {
 		let newOrder = new FormGroup({
-			material: new FormControl('vinyl'),
+			material: new FormControl('vinyl', [Validators.required]),
 			plotter: new FormControl(''),
-			type: new FormControl(''),
+			materialType: new FormControl(''),
 			height: new FormControl(''),
 			width: new FormControl(''),
 			additionalMaterial: new FormControl(''),
 			additionalService: new FormControl(''),
-			description: new FormControl(''),
+			meters: new FormControl(''),
+			colours: new FormControl(''),
+			clientType: new FormControl(''),
+			thickness: new FormControl(''),
+			units: new FormControl(''),
+			print: new FormControl(''),
 		});
-		this.orders?.controls.push(newOrder);
+		this.orders?.push(newOrder);
 	}
 
 	deleteOrder(index: number) {
 		this.orders.controls.splice(index, 1)
+	}
+
+	send(){
+		this.emitter.emit(this.form)
+		this.orders.valueChanges
+		.subscribe(data => this.emitter.emit(this.form))
 	}
 	
 }

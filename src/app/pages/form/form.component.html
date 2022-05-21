@@ -32,7 +32,7 @@
     <!-- PEDIDO -->
     <!-- PEDIDO -->
     <!-- PEDIDO -->
-    <app-order></app-order>
+    <app-order (emitter)="getData($event)"></app-order>
     <!-- PAGO  -->
     <!-- PAGO  -->
     <!-- PAGO  -->
@@ -40,30 +40,40 @@
         <h3 class="text-center text-secondary mb-3">PAGO</h3>
         <div class="col">
             <div class="row">
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-5 mb-3">
                     <div class="input-group">
                         <span class="input-group-text">$</span>
                         <input type="number" class="form-control" id="amount" placeholder="Costo Total" formControlName="amount">
                     </div>
                 </div>
-                <div class="col-lg-4 mb-3">
-                    <div class="col input-group">
+                <div class="col-lg-3 mb-3">
+                    <div class=" input-group">
                         <span class="input-group-text">$</span>
                         <input type="number" class="form-control" id="warranty" placeholder="Anticipo" formControlName="warranty">
                     </div>
                 </div>
-                <div class="col-lg-4 mb-3">
-                    <div class="col input-group">
+                <div class="col-lg-3 mb-3">
+                    <div class=" input-group">
                         <span class="input-group-text">$</span>
                         <input type="number" class="form-control" id="balance" placeholder="Saldo" formControlName="balance">
                     </div>
+                </div>
+                <div class="col-lg-1 mb-3">
+                    <select name="discount" class="form-select">
+                        <option>0%</option>
+                        <option>5%</option>
+                        <option>10%</option>
+                        <option>15%</option>
+                        <option>20%</option>
+                        <option>25%</option>
+                    </select>
                 </div>
             </div>
         </div>
     </div>
     <div class="row border rounded">
         <div class="col text-center m-3">
-            <button [disabled]="" type="submit" class="btn btn-success mx-1">Confirmar</button>
+            <button [disabled]="form.valid" type="submit" class="btn btn-success mx-1">Confirmar</button>
             <button class="btn btn-danger mx-1">Descartar</button>
         </div>
     </div>
