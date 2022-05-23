@@ -37,6 +37,12 @@ export class formComponent implements OnInit {
 
   getData(data: any){
     this.form.setControl('orderData', data)
+    let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
+    let totalControl = this.form.get('balanceData')?.get('amount')
+    let total = 0;
+    arr.forEach(order => total += order.get('partialAmount')?.value)
+    console.log(total)
+    totalControl?.setValue(total)
   }
-  
+
 }

@@ -5,6 +5,7 @@ import { formComponent } from './pages/form/form.component';
 
 const routes: Routes = [
   {path: 'form', component: formComponent},
+  {path: '**', redirectTo: 'form'}
 ];
 
 @NgModule({

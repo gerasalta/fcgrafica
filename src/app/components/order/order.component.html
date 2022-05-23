@@ -115,10 +115,6 @@
                     <!-- POLIFAN -->
                     <div class="row" *ngSwitchCase="'polyfan'">
                         <div class="col-lg-3 mb-3">
-                            <select name="type" class="form-select" formControlName="clientType">
-                                <option value="finalConsumer">Cons. Final</option>
-                                <option value="guild">Gremio</option>
-                            </select>
                         </div>
                         <div class="col-lg-2 mb-3">
                             <select name="type" class="form-select" formControlName="thickness">
@@ -134,8 +130,8 @@
                         </div>
                         <div class="col-lg-2 mb-3">
                             <select class="form-select" formControlName="print">
-                                <option value="yes" selected >Sin Pintura</option>
-                                <option value="no">Pintura</option>
+                                <option value="false" selected >Sin Pintura</option>
+                                <option value="true">Pintura</option>
                             </select>
                         </div>
                         <div class="col-lg-2 mb-3">

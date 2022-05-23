@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
 	selector: 'app-order',
@@ -16,11 +17,11 @@ export class OrderComponent implements OnInit {
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
 	showDescription: boolean = false;
 
-	get disabledDelete (){
+	get disabledDelete() {
 		return this.orders.controls.length <= 1
 	}
 
-	constructor() { }
+	constructor(private db: DatabaseService) { }
 
 	ngOnInit(): void {
 		this.addOrder();
@@ -34,30 +35,42 @@ export class OrderComponent implements OnInit {
 	addOrder() {
 		let newOrder = new FormGroup({
 			material: new FormControl('vinyl', [Validators.required]),
-			plotter: new FormControl(''),
-			materialType: new FormControl(''),
-			height: new FormControl(''),
-			width: new FormControl(''),
-			additionalMaterial: new FormControl(''),
-			additionalService: new FormControl(''),
-			meters: new FormControl(''),
-			colours: new FormControl(''),
-			clientType: new FormControl(''),
-			thickness: new FormControl(''),
-			units: new FormControl(''),
-			print: new FormControl(''),
+			plotter: new FormControl('print'),
+			materialType: new FormControl('glossy'),
+			height: new FormControl(0),
+			width: new FormControl(0),
+			additionalMaterial: new FormControl('justMaterial'),
+			additionalService: new FormControl('install'),
+			meters: new FormControl(0),
+			colours: new FormControl('white'),
+			thickness: new FormControl(20),
+			units: new FormControl(1),
+			print: new FormControl('false'),
+			partialAmount: new FormControl('')
 		});
 		this.orders?.push(newOrder);
+	}
+
+	calculateAmount() {
+		let arr = this.orders.controls
+		for (let order of arr){
+			if (order.get('material')?.value === 'vinyl') {
+				let additional = this.db.price[order.get('plotter')?.value] + this.db.price[order.get('materialType')?.value] + this.db.price[order.get('additionalService')?.value]
+				let amount = order.get('width')?.value * order.get('height')?.value * additional
+				order.get('partialAmount')?.setValue(amount, {emitEvent: false})
+			}
+		}
 	}
 
 	deleteOrder(index: number) {
 		this.orders.controls.splice(index, 1)
 	}
 
-	send(){
-		this.emitter.emit(this.form)
+	send() {
 		this.orders.valueChanges
-		.subscribe(data => this.emitter.emit(this.form))
+			.subscribe(
+				{ next: data => {this.calculateAmount(),  this.emitter.emit(this.form)} }
+			)
 	}
-	
+
 }
