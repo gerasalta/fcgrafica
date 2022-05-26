@@ -16,6 +16,7 @@
                     <div class="row" *ngSwitchCase="'vinyl'">
                         <div class="col-lg-2 mb-3">
                             <select name="plotter" class="form-select" formControlName="plotter">
+                                <option value="justMaterial">Simple</option>
                                 <option value="print">Impreso</option>
                                 <option value="cut">Corte</option>
                                 <option value="mix">Mixto</option>
@@ -37,7 +38,7 @@
                         </div>
                         <div class="col-lg-3 mb-3">
                             <select class="form-select" formControlName="additionalService">
-                                <option selected value="justMaterial" >Sin Instalar</option>
+                                <option value="justMaterial" >Sin Instalar</option>
                                 <option value="install">Instalar</option>
                                 <option value="removeInstall">Remover/Instalar</option>
                             </select>
@@ -54,7 +55,7 @@
                                 <option value="eyelets">C/ Hojales</option>
                                 <option value="hangingBanner">Bolsillos</option>
                                 <option value="tensioner">Tensor</option>
-                                <option value="oubleTensioner">Doble Tensor</option>
+                                <option value="doubleTensioner">Doble Tensor</option>
                                 <option value="rollUp">Roll Up</option>
                                 <option value="structuralIron">Estructural</option>
                                 <option value="bright">Luminoso</option>
@@ -75,9 +76,9 @@
                         </div>
                         <div class="col-lg-3 mb-3">
                             <select class="form-select" formControlName="additionalService">
-                                <option selected value="just-material">Sin Instalar</option>
+                                <option selected value="justMaterial">Sin Instalar</option>
                                 <option selected value="install">Instalar</option>
-                                <option value="remove-install">Remover/Instalar</option>
+                                <option value="removeInstall">Remover/Instalar</option>
                             </select>
                         </div>
                         <div  class="col-lg-1 mb-3">
@@ -87,7 +88,7 @@
                     <!-- NEON -->
                     <div class="row" *ngSwitchCase="'light'">
                         <div class="col-lg-3 mb-3">
-                            <select name="type" class="form-select" formControlName="materialType">
+                            <select name="type" class="form-select" formControlName="lightMaterial">
                                 <option selected value="neon" >Neon</option>
                                 <option value="led">Led</option>
                             </select>
@@ -114,29 +115,25 @@
                     </div>
                     <!-- POLIFAN -->
                     <div class="row" *ngSwitchCase="'polyfan'">
-                        <div class="col-lg-3 mb-3">
-                        </div>
                         <div class="col-lg-2 mb-3">
                             <select name="type" class="form-select" formControlName="thickness">
                                 <option value="20">20mm</option>
                                 <option value="25">25mm</option>
                                 <option value="30">30mm</option>
-                                <option value="40">40mm</option>
-                                <option value="50">50mm</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 col mb-3">
+                        <div class="col-lg-3 col mb-3">
                             <input class="form-control" placeholder="unidades" formControlName="units">
                         </div>
-                        <div class="col-lg-2 mb-3">
-                            <select class="form-select" formControlName="print">
-                                <option value="false" selected >Sin Pintura</option>
-                                <option value="true">Pintura</option>
+                        <div class="col-lg-3 mb-3">
+                            <select class="form-select" formControlName="additionalMaterial">
+                                <option value="justMaterial" selected >Sin Pintura</option>
+                                <option value="print">Pintura</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 mb-3">
+                        <div class="col-lg-3 mb-3">
                             <select class="form-select" formControlName="additionalService">
-                                <option value="withoutInstall" selected >Sin Instalar</option>
+                                <option value="justMaterial" selected >Sin Instalar</option>
                                 <option value="install">Instalar</option>
                             </select>
                         </div>

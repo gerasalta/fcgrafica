@@ -6,22 +6,51 @@ import { Injectable } from '@angular/core';
 export class DatabaseService {
 
   price: any = {
-    cut: 2000,
-    print: 2000,
-    mix: 4000,
-    glossy: 0,
-    frosted: 200,
-    perforated: 200,
-    justMaterial: 0,
-    install: 200,
-    removeInstall: 400,
-    yes: 0
+    vinyl: {
+      cut: 100,
+      print: 100,
+      mix: 2000,
+      glossy: 2000,
+      mate: 2200,
+      perforated: 2200,
+      frosted: 2200,
+      install: 100,
+      removeInstall: 200,
+      justMaterial: 0
+    },
+    banner:{
+      tensioner: 2080,
+      doubleTensioner: 2580,
+      rollUp: 3580,
+      glossy: 2000,
+      mate: 2200,
+      back: 2500,
+      install: 100,
+      justMaterial: 0,
+      removeInstall: 200,
+      eyelets: 150,
+      hangingBanner: 100,
+      structuralIron: 3500,
+      bright: 12000
+    },
+    light: {
+      neon: 2000,
+      led: 2000
+    },
+    polyfan: {
+      20: 2500,
+      25: 2800,
+      30: 3000,
+      print: 2000,
+      install: 2000,
+      justMaterial: 0
+    }
   }
 
   constructor() { }
 
-  getPrice(){
-    return this.price
+  getPrice(material: any){
+    return this.price[material]
   }
 
 }

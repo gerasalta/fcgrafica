@@ -39,10 +39,13 @@ export class formComponent implements OnInit {
     this.form.setControl('orderData', data)
     let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
     let totalControl = this.form.get('balanceData')?.get('amount')
+    let warranty = this.form.get('balanceData')?.get('warranty')
+    let balance = this.form.get('balanceData')?.get('balance')
     let total = 0;
     arr.forEach(order => total += order.get('partialAmount')?.value)
-    console.log(total)
     totalControl?.setValue(total)
+    warranty?.valueChanges
+    .subscribe(()=>{balance?.setValue(total - warranty?.value, { emitEvent: false })})
   }
 
 }
