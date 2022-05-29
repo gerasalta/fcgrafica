@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
   selector: 'app-form',
@@ -18,34 +19,67 @@ export class formComponent implements OnInit {
     company: new FormControl(''),
   }),
   orderData: new FormGroup({
+    arrOrders: new FormArray([
+      new FormGroup({
+      material: new FormControl('vinyl'),
+      plotter: new FormControl('print'),
+      materialType: new FormControl('glossy'),
+      height: new FormControl(0),
+      width: new FormControl(0),
+      additionalMaterial: new FormControl('justMaterial'),
+      additionalService: new FormControl('justMaterial'),
+      meters: new FormControl(0),
+      colours: new FormControl('white'),
+      thickness: new FormControl(20),
+      units: new FormControl(0),
+      print: new FormControl('false'),
+      partialAmount: new FormControl(0),
+      lightMaterial: new FormControl('neon'),
+    })
+  ]),
   }),
   balanceData: new FormGroup({
-    amount: new FormControl('',Validators.required),
-    warranty: new FormControl('',Validators.required),
-    balance: new FormControl('',Validators.required),
+    total: new FormControl(0),
+    subTotal: new FormControl(0),
+    warranty: new FormControl(0),
+    balance: new FormControl(0),
+    discount: new FormControl(0)
   })
- }) 
+ })
+ initialValue = this.form.value
 
-  constructor() { }
+  constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
+    this.calculateAmount();
+    console.log(this.form.value)
   }
 
-  sendData(){
-    console.log(this.form.value);
+  confirm(){
+    this.db.postOrder(this.form.value)
+    this.form.reset(this.initialValue)
   }
 
   getData(data: any){
     this.form.setControl('orderData', data)
-    let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
-    let totalControl = this.form.get('balanceData')?.get('amount')
-    let warranty = this.form.get('balanceData')?.get('warranty')
-    let balance = this.form.get('balanceData')?.get('balance')
-    let total = 0;
-    arr.forEach(order => total += order.get('partialAmount')?.value)
-    totalControl?.setValue(total)
-    warranty?.valueChanges
-    .subscribe(()=>{balance?.setValue(total - warranty?.value, { emitEvent: false })})
+  }
+
+  calculateAmount(){
+    this.form.valueChanges
+    .subscribe(()=>{
+      let balanceData = this.form.get('balanceData')
+      let discountControls = balanceData?.get('discount')
+      let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
+      let subTotalControls = balanceData?.get('subTotal')
+      let warrantyControls = balanceData?.get('warranty')
+      let balanceControls = balanceData?.get('balance')
+      let totalAmount = 0;
+      arr.forEach(order => totalAmount += order.get('partialAmount')?.value)
+      let discount = (totalAmount / 100) * discountControls?.value
+      balanceData?.get('total')?.setValue(totalAmount, {emitEvent: false})
+      subTotalControls?.setValue(totalAmount - discount, {emitEvent: false})
+      balanceControls?.setValue(totalAmount - discount - warrantyControls?.value, {emitEvent: false})
+    })
   }
 
 }

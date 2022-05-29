@@ -47,10 +47,19 @@ export class DatabaseService {
     }
   }
 
+  orders: any[] = [
+
+  ]
+
   constructor() { }
 
   getPrice(material: any){
     return this.price[material]
+  }
+
+  postOrder(order: any){
+    this.orders.push(order)
+    console.log(this.orders)
   }
 
 }

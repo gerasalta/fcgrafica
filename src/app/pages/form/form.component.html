@@ -1,4 +1,4 @@
-<form class="container mt-3" [formGroup]="form" (ngSubmit)="sendData()">
+<form class="container mt-3" [formGroup]="form" (ngSubmit)="confirm()">
     <!-- DATOS DEL CLIENTE -->
     <!-- DATOS DEL CLIENTE -->
     <!-- DATOS DEL CLIENTE -->
@@ -40,40 +40,43 @@
         <h3 class="text-center text-secondary mb-3">PAGO</h3>
         <div class="col">
             <div class="row">
-                <div class="col-lg-5 mb-3">
+                <div class="col-lg-2 mb-3">
                     <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="number" class="form-control" id="amount" placeholder="Costo Total" formControlName="amount">
+                        <span class="input-group-text">Dcto.</span>
+                        <select name="discount" class="form-select" formControlName="discount">
+                            <option value="0">0%</option>
+                            <option value="5">5%</option>
+                            <option value="10">10%</option>
+                            <option value="15">15%</option>
+                            <option value="20">20%</option>
+                            <option value="25">25%</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">Sub Total</span>
+                        <input class="form-control" id="subTotal" placeholder="Costo Total" formControlName="subTotal">
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3">
                     <div class=" input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="number" class="form-control" id="warranty" placeholder="Anticipo" formControlName="warranty">
+                        <span class="input-group-text">Anticipo</span>
+                        <input class="form-control" id="warranty" placeholder="Anticipo" formControlName="warranty">
                     </div>
                 </div>
                 <div class="col-lg-3 mb-3">
-                    <div class=" input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="number" class="form-control" id="balance" placeholder="Saldo" formControlName="balance">
+                    <div class="input-group">
+                        <span class="input-group-text">Balance</span>
+                        <input class="form-control" id="balance" placeholder="Saldo" formControlName="balance">
                     </div>
-                </div>
-                <div class="col-lg-1 mb-3">
-                    <select name="discount" class="form-select">
-                        <option>0%</option>
-                        <option>5%</option>
-                        <option>10%</option>
-                        <option>15%</option>
-                        <option>20%</option>
-                        <option>25%</option>
-                    </select>
                 </div>
             </div>
         </div>
     </div>
     <div class="row border rounded">
         <div class="col text-center m-3">
-            <button [disabled]="form.valid" type="submit" class="btn btn-success mx-1">Confirmar</button>
+            <button [disabled]="!form.valid" type="submit" class="btn btn-success mx-1">Confirmar</button>
             <button class="btn btn-danger mx-1">Descartar</button>
         </div>
     </div>

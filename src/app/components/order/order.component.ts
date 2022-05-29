@@ -7,6 +7,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 	templateUrl: './order.component.html',
 	styleUrls: ['./order.component.scss']
 })
+
 export class OrderComponent implements OnInit {
 
 	@Output() emitter = new EventEmitter();
@@ -14,6 +15,7 @@ export class OrderComponent implements OnInit {
 		arrOrders: new FormArray([]),
 		description: new FormControl('')
 	});
+
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
 	showDescription: boolean = false;
 
@@ -24,29 +26,31 @@ export class OrderComponent implements OnInit {
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit(): void {
-		this.addOrder();
 		this.send();
+		this.emitter.emit(this.form);
+		this.addOrder();
 	}
 
 	openDescription() {
 		this.showDescription === false ? this.showDescription = true : this.showDescription = false
+		console.log(this.form.value)
 	}
 
 	addOrder() {
 		let newOrder = new FormGroup({
-			material: new FormControl('vinyl', [Validators.required]),
+			material: new FormControl('vinyl'),
 			plotter: new FormControl('print'),
 			materialType: new FormControl('glossy'),
-			height: new FormControl(),
-			width: new FormControl(),
+			height: new FormControl(0),
+			width: new FormControl(0),
 			additionalMaterial: new FormControl('justMaterial'),
 			additionalService: new FormControl('justMaterial'),
-			meters: new FormControl(),
+			meters: new FormControl(0),
 			colours: new FormControl('white'),
 			thickness: new FormControl(20),
-			units: new FormControl(),
+			units: new FormControl(0),
 			print: new FormControl('false'),
-			partialAmount: new FormControl(''),
+			partialAmount: new FormControl(0),
 			lightMaterial: new FormControl('neon'),
 		});
 		this.orders?.push(newOrder);
@@ -92,14 +96,13 @@ export class OrderComponent implements OnInit {
 	}
 
 	deleteOrder(index: number) {
-		this.orders.controls.splice(index, 1)
+		this.orders.controls.splice(index, 1);
+		this.emitter.emit(this.form)
 	}
 
 	send() {
 		this.orders.valueChanges
-			.subscribe(
-				{ next: data => { this.calculateAmount(), this.emitter.emit(this.form) } }
-			)
+			.subscribe(() => { this.calculateAmount(), this.emitter.emit(this.form) })
 	}
 
 }
