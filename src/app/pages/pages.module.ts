@@ -3,18 +3,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { formComponent } from './form/form.component';
+import { ListComponent } from './list/list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
 @NgModule({
   declarations: [
-    formComponent
+    formComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     ComponentsModule,
+    NgbModule
   ],
   exports: [
     formComponent

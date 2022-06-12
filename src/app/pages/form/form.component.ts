@@ -35,8 +35,9 @@ export class formComponent implements OnInit {
       print: new FormControl('false'),
       partialAmount: new FormControl(0),
       lightMaterial: new FormControl('neon'),
-    })
+    }),
   ]),
+  description: new FormControl('')
   }),
   balanceData: new FormGroup({
     total: new FormControl(0),
@@ -46,18 +47,29 @@ export class formComponent implements OnInit {
     discount: new FormControl(0)
   })
  })
+
  initialValue = this.form.value
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
     this.calculateAmount();
-    console.log(this.form.value)
   }
 
   confirm(){
     this.db.postOrder(this.form.value)
     this.form.reset(this.initialValue)
+    this.resetOrders()
+  }
+
+  resetForm(){
+    this.form.reset(this.initialValue)
+    this.resetOrders()
+  }
+
+  resetOrders(){
+    let ordersLenght = this.form.get('orderData')?.get('arrOrders') as FormArray
+    ordersLenght.controls.splice(1, ordersLenght.length - 1)
   }
 
   getData(data: any){
