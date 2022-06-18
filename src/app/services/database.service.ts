@@ -102,4 +102,8 @@ export class DatabaseService {
     return this.orders
   }
 
+  deleteOrder(index: number){
+    
+  }
+
 }

@@ -9,46 +9,48 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class formComponent implements OnInit {
 
- form:  FormGroup = new FormGroup({
-  clientData: new FormGroup({
-    name: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-    address: new FormControl(''),
-    email: new FormControl(''),
-    company: new FormControl(''),
-  }),
-  orderData: new FormGroup({
-    arrOrders: new FormArray([
-      new FormGroup({
-      material: new FormControl('vinyl'),
-      plotter: new FormControl('print'),
-      materialType: new FormControl('glossy'),
-      height: new FormControl(0),
-      width: new FormControl(0),
-      additionalMaterial: new FormControl('justMaterial'),
-      additionalService: new FormControl('justMaterial'),
-      meters: new FormControl(0),
-      colours: new FormControl('white'),
-      thickness: new FormControl(20),
-      units: new FormControl(0),
-      print: new FormControl('false'),
-      partialAmount: new FormControl(0),
-      lightMaterial: new FormControl('neon'),
+  form: FormGroup = new FormGroup({
+    clientData: new FormGroup({
+      name: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      address: new FormControl(''),
+      email: new FormControl(''),
+      company: new FormControl(''),
     }),
-  ]),
-  description: new FormControl('')
-  }),
-  balanceData: new FormGroup({
-    total: new FormControl(0),
-    subTotal: new FormControl(0),
-    warranty: new FormControl(0),
-    balance: new FormControl(0),
-    discount: new FormControl(0)
+    orderData: new FormGroup({
+      arrOrders: new FormArray([
+        new FormGroup({
+          material: new FormControl('vinyl'),
+          plotter: new FormControl('print'),
+          materialType: new FormControl('glossy'),
+          height: new FormControl(0),
+          width: new FormControl(0),
+          additionalMaterial: new FormControl('justMaterial'),
+          additionalService: new FormControl('justMaterial'),
+          meters: new FormControl(0),
+          colours: new FormControl('white'),
+          thickness: new FormControl(20),
+          units: new FormControl(0),
+          print: new FormControl('false'),
+          partialAmount: new FormControl(0),
+          lightMaterial: new FormControl('neon'),
+        }),
+      ]),
+      description: new FormControl(''),
+      finishDate: new FormControl('')
+    }),
+    balanceData: new FormGroup({
+      total: new FormControl(0),
+      subTotal: new FormControl(0),
+      warranty: new FormControl(0),
+      balance: new FormControl(0),
+      discount: new FormControl(0),
+      date: new FormControl(0),
+    })
   })
- })
 
- initialValue = this.form.value
+  initialValue = this.form.value
 
   constructor(private db: DatabaseService) { }
 
@@ -56,42 +58,42 @@ export class formComponent implements OnInit {
     this.calculateAmount();
   }
 
-  confirm(){
+  confirm() {
     this.db.postOrder(this.form.value)
     this.form.reset(this.initialValue)
     this.resetOrders()
   }
 
-  resetForm(){
+  resetForm() {
     this.form.reset(this.initialValue)
     this.resetOrders()
   }
 
-  resetOrders(){
+  resetOrders() {
     let ordersLenght = this.form.get('orderData')?.get('arrOrders') as FormArray
     ordersLenght.controls.splice(1, ordersLenght.length - 1)
   }
 
-  getData(data: any){
+  getData(data: any) {
     this.form.setControl('orderData', data)
   }
 
-  calculateAmount(){
+  calculateAmount() {
     this.form.valueChanges
-    .subscribe(()=>{
-      let balanceData = this.form.get('balanceData')
-      let discountControls = balanceData?.get('discount')
-      let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
-      let subTotalControls = balanceData?.get('subTotal')
-      let warrantyControls = balanceData?.get('warranty')
-      let balanceControls = balanceData?.get('balance')
-      let totalAmount = 0;
-      arr.forEach(order => totalAmount += order.get('partialAmount')?.value)
-      let discount = (totalAmount / 100) * discountControls?.value
-      balanceData?.get('total')?.setValue(totalAmount, {emitEvent: false})
-      subTotalControls?.setValue(totalAmount - discount, {emitEvent: false})
-      balanceControls?.setValue(totalAmount - discount - warrantyControls?.value, {emitEvent: false})
-    })
+      .subscribe(() => {
+        let balanceData = this.form.get('balanceData')
+        let discountControls = balanceData?.get('discount')
+        let arr = (this.form.get('orderData')?.get('arrOrders') as FormArray).controls
+        let totalControls = balanceData?.get('total')
+        let warrantyControls = balanceData?.get('warranty')
+        let balanceControls = balanceData?.get('balance')
+        let subtotalAmount = 0;
+        arr.forEach(order => subtotalAmount += order.get('partialAmount')?.value)
+        let discount = (subtotalAmount / 100) * discountControls?.value
+        balanceData?.get('subTotal')?.setValue(subtotalAmount, { emitEvent: false })
+        totalControls?.setValue(subtotalAmount - discount, { emitEvent: false })
+        balanceControls?.setValue(subtotalAmount - discount - warrantyControls?.value, { emitEvent: false })
+      })
   }
 
 }

@@ -49,41 +49,46 @@
                           <th>Servicio</th>
                           <th>Precio</th>
                           <th></th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
                         <ng-container *ngFor="let item of order.orderData.arrOrders, let position = index"
                           [ngSwitch]="item.material">
                           <tr *ngSwitchCase="'vinyl'">
-                            <td>{{position}}</td>
+                            <td>{{position+1}}</td>
                             <td>{{item.material}} {{item.plotter}} {{item.materialType}}</td>
                             <td>{{item.width}}x{{item.height}}</td>
                             <td>{{item.additionalService}}</td>
                             <td>{{item.partialAmount}}</td>
                             <td></td>
+                            <td></td>
                           </tr>
                           <tr *ngSwitchCase="'banner'">
-                            <td>{{position}}</td>
+                            <td>{{position+1}}</td>
                             <td>{{item.material}} {{item.materialType}}</td>
                             <td>{{item.width}}x{{item.height}}</td>
                             <td>{{item.additionalMaterial}} {{item.additionalService}}</td>
                             <td>{{item.partialAmount}}</td>
                             <td></td>
+                            <td></td>
                           </tr>
                           <tr *ngSwitchCase="'polyfan'">
-                            <td>{{position}}</td>
+                            <td>{{position+1}}</td>
                             <td>{{item.material}}</td>
                             <td>{{item.units}}</td>
                             <td>{{item.additionalMaterial}} {{item.additionalService}}</td>
                             <td>{{item.partialAmount}}</td>
                             <td></td>
+                            <td></td>
                           </tr>
                           <tr *ngSwitchCase="'light'">
-                            <td>{{position}}</td>
+                            <td>{{position+1}}</td>
                             <td>{{item.material}} {{item.lightMaterial}} {{item.colours}}</td>
                             <td>{{item.meters}}</td>
                             <td>-</td>
                             <td>{{item.partialAmount}}</td>
+                            <td></td>
                             <td></td>
                           </tr>
                         </ng-container>
@@ -96,22 +101,25 @@
                           <th>Anticipo</th>
                           <th>Subtotal</th>
                           <th>Total</th>
+                          <th>Saldo</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr>
                         <td></td>
-                        <td></td>
-                        <td>$ {{order.balanceData.discount}}</td>
+                        <td> {{order.balanceData.date | date}}</td>
+                        <td>% {{order.balanceData.discount}}</td>
                         <td>$ {{order.balanceData.warranty}}</td>
+                        <td>$ {{order.balanceData.subTotal}}</td>
                         <td>$ {{order.balanceData.total}}</td>
-                        <td></td>
+                        <td>$ {{order.balanceData.balance}}</td>
                       </tr>
                       </tbody>
                     </table>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
+                    <button type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
                   </div>
                 </div>
               </div>

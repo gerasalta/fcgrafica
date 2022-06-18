@@ -20,4 +20,8 @@ export class ListComponent implements OnInit {
     this.orders = this.db.getOrders()
   }
 
+  deleteOrder(index: number){
+    
+  }
+
 }

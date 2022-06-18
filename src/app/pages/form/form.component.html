@@ -42,6 +42,12 @@
             <div class="row">
                 <div class="col-lg-2 mb-3">
                     <div class="input-group">
+                        <span class="input-group-text">Sub Total</span>
+                        <input class="form-control" id="subTotal" placeholder="Costo Total" formControlName="subTotal">
+                    </div>
+                </div>
+                <div class="col-lg-2 mb-3">
+                    <div class="input-group">
                         <span class="input-group-text">Dcto.</span>
                         <select name="discount" class="form-select" formControlName="discount">
                             <option value="0">0%</option>
@@ -53,23 +59,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-3">
+                <div class="col-lg-2 mb-3">
                     <div class="input-group">
-                        <span class="input-group-text">Sub Total</span>
-                        <input class="form-control" id="subTotal" placeholder="Costo Total" formControlName="subTotal">
+                        <span class="input-group-text">Total</span>
+                        <input class="form-control" id="subTotal" placeholder="Costo Total" formControlName="total">
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
+                <div class="col-lg-2 mb-3">
                     <div class=" input-group">
                         <span class="input-group-text">Anticipo</span>
                         <input class="form-control" id="warranty" placeholder="Anticipo" formControlName="warranty">
                     </div>
                 </div>
-                <div class="col-lg-3 mb-3">
+                <div class="col-lg-2 mb-3">
                     <div class="input-group">
                         <span class="input-group-text">Balance</span>
                         <input class="form-control" id="balance" placeholder="Saldo" formControlName="balance">
                     </div>
+                </div>
+                <div class="col-lg-2 mb-3">
+                    <input class="date" type="date" class="form-control" formControlName="date">
                 </div>
             </div>
         </div>
