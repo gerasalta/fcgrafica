@@ -8,7 +8,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class ListComponent implements OnInit {
 
-  orders: any[] = [];
+  orders: any = [];
 
   constructor(private db: DatabaseService) { }
 
@@ -17,11 +17,17 @@ export class ListComponent implements OnInit {
   }
 
   getOrders(){
-    this.orders = this.db.getOrders()
+    this.db.getOrders()
+    .subscribe(
+      {next: data => this.orders = data}
+    )
   }
 
   deleteOrder(index: number){
-    
+    this.db.deleteOrder(this.orders[index]._id)
+    .subscribe(
+      {next: data => console.log(data)}
+      )
   }
 
 }
