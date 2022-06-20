@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 export class DatabaseService {
 
   apiUrl: string = 'https://fc-grafica.herokuapp.com/api/orders'
+  pageNumber: number = 1;
+  limit: number = 8;
 
   price: any = {
     vinyl: {
@@ -60,11 +62,12 @@ export class DatabaseService {
     return this.http.post(this.apiUrl, order)
   }
 
-  getOrders() {
-   return this.http.get(this.apiUrl)
+  getOrders(pageNumber: number) {
+    this.pageNumber = pageNumber
+    return this.http.get(`${this.apiUrl}?page=${this.pageNumber}&limit=${this.limit}`)
   }
 
-  deleteOrder(id: string){
+  deleteOrder(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`)
   }
 

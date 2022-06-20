@@ -30,14 +30,19 @@
               <td>$ {{order.balanceData.total}}</td>
               <td>$ {{order.balanceData.warranty}}</td>
               <td>$ {{order.balanceData.balance}}</td>
-              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i class="fa-solid fa-circle-info"></i></button></td>
+              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i
+                    class="fa-solid fa-circle-info"></i></button></td>
             </tr>
             <div class="modal fade" id="modal{{i}}" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                   <div class="modal-header d-flex flex-column">
-                    <h3 class="modal-title">{{order.clientData.company}} ({{order.clientData.name}} {{order.clientData.lastName}})</h3>
-                    <h5 class="modal-title text-secondary"><i class="fa-solid fa-phone"></i> {{order.clientData.phone}} <i class="fa-solid fa-location-dot"></i> {{order.clientData.email}} <i class="fa-solid fa-envelope"></i> {{order.clientData.address}}</h5>
+                    <h3 class="modal-title">{{order.clientData.company}} ({{order.clientData.name}}
+                      {{order.clientData.lastName}})</h3>
+                    <h5 class="modal-title text-secondary"><i class="fa-solid fa-phone"></i> {{order.clientData.phone}}
+                      <i class="fa-solid fa-location-dot"></i> {{order.clientData.email}} <i
+                        class="fa-solid fa-envelope"></i> {{order.clientData.address}}
+                    </h5>
                   </div>
                   <div class="modal-body">
                     <table class="table">
@@ -106,26 +111,42 @@
                       </thead>
                       <tbody>
                         <tr>
-                        <td></td>
-                        <td> {{order.balanceData.date | date}}</td>
-                        <td>% {{order.balanceData.discount}}</td>
-                        <td>$ {{order.balanceData.warranty}}</td>
-                        <td>$ {{order.balanceData.subTotal}}</td>
-                        <td>$ {{order.balanceData.total}}</td>
-                        <td>$ {{order.balanceData.balance}}</td>
-                      </tr>
+                          <td></td>
+                          <td> {{order.balanceData.date | date}}</td>
+                          <td>% {{order.balanceData.discount}}</td>
+                          <td>$ {{order.balanceData.warranty}}</td>
+                          <td>$ {{order.balanceData.subTotal}}</td>
+                          <td>$ {{order.balanceData.total}}</td>
+                          <td>$ {{order.balanceData.balance}}</td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                    <button type="button" class="btn btn-danger" (click)="deleteOrder(i)"><i class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteOrder(i)"><i
+                        class="fa-solid fa-trash-can"></i></button>
                   </div>
                 </div>
               </div>
             </div>
           </ng-container>
+
         </tbody>
       </table>
     </div>
+    <div *ngIf="spinner" class="row d-flex justify-content-center m-3">
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only"></span>
+      </div>
+    </div>
+    <nav class="row m-3" aria-label="...">
+      <ul class="pagination justify-content-center">
+        <button class="btn btn-soft mx-1"[disabled]="!prevPage"><i class="fa-solid fa-caret-left"></i></button>
+        <ng-container *ngFor="let page of pagination; let i = index">
+          <div class="btn btn-soft mx-1" (click)="turnPage(i+1)">{{i+1}}</div>
+        </ng-container>
+        <button class="btn btn-soft mx-1" [disabled]="!nextPage"><i class="fa-solid fa-caret-right"></i></button>
+      </ul>
+    </nav>
   </div>

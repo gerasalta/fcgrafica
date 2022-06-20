@@ -13,7 +13,7 @@ export class OrderComponent implements OnInit {
 	@Output() emitter = new EventEmitter();
 	form: FormGroup = new FormGroup({
 		arrOrders: new FormArray([]),
-		description: new FormControl(''),
+		description: new FormControl('')
 	});
 
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
