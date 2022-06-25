@@ -28,9 +28,6 @@ export class ListComponent implements OnInit {
     .subscribe({
       next: (data:any) => {
         this.orders = data.docs;
-        for (let i = 0; i < data.totalPages; i++ ){
-          this.pagination.push({})
-        };
         this.nextPage = data.hasNextPage;
         this.prevPage = data.hasPrevPage;
       },
@@ -45,9 +42,9 @@ export class ListComponent implements OnInit {
     })
   }
 
-  turnPage(numberPage: number){
-    this.actualPage = numberPage;
-    this.getOrders();
+  turnPage(page: number){
+    this.actualPage += page
+    this.getOrders()
   }
 
 }

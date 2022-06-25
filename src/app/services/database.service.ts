@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DatabaseService {
 
-  apiUrl: string = 'https://fc-grafica.herokuapp.com/api/orders'
+  apiUrl: string = 'https://backend-fc.herokuapp.com/api/orders'
   pageNumber: number = 1;
   limit: number = 8;
 

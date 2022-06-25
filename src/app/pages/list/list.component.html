@@ -142,11 +142,8 @@
     </div>
     <nav class="row m-3" aria-label="...">
       <ul class="pagination justify-content-center">
-        <button class="btn btn-soft mx-1"[disabled]="!prevPage"><i class="fa-solid fa-caret-left"></i></button>
-        <ng-container *ngFor="let page of pagination; let i = index">
-          <div class="btn btn-soft mx-1" (click)="turnPage(i+1)">{{i+1}}</div>
-        </ng-container>
-        <button class="btn btn-soft mx-1" [disabled]="!nextPage"><i class="fa-solid fa-caret-right"></i></button>
+        <button class="btn btn-soft mx-1"[disabled]="!prevPage" (click)="turnPage(-1)"><i class="fa-solid fa-caret-left"></i></button>
+        <button class="btn btn-soft mx-1" [disabled]="!nextPage" (click)="turnPage(+1)"><i class="fa-solid fa-caret-right"></i></button>
       </ul>
     </nav>
   </div>
