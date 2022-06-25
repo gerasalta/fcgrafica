@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list',
@@ -14,17 +16,19 @@ export class ListComponent implements OnInit {
   actualPage: number = 1;
   nextPage: boolean = false;
   prevPage: boolean = false;
+  keyword: FormControl = new FormControl("");
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
-    this.getOrders()
+    this.getOrders();
+    this.sendKeyword();
   }
 
   getOrders(){
     this.pagination = []
     this.spinner = true;
-    this.db.getOrders(this.actualPage)
+    this.db.getOrders(this.actualPage, this.keyword.value)
     .subscribe({
       next: (data:any) => {
         this.orders = data.docs;
@@ -45,6 +49,12 @@ export class ListComponent implements OnInit {
   turnPage(page: number){
     this.actualPage += page
     this.getOrders()
+  }
+
+  sendKeyword(){
+    this.keyword.valueChanges
+    .pipe(debounceTime(500))
+    .subscribe((data)=>{this.getOrders()});
   }
 
 }

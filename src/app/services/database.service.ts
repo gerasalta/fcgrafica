@@ -62,9 +62,9 @@ export class DatabaseService {
     return this.http.post(this.apiUrl, order)
   }
 
-  getOrders(pageNumber: number) {
+  getOrders(pageNumber: number, keyword: string) {
     this.pageNumber = pageNumber
-    return this.http.get(`${this.apiUrl}?page=${this.pageNumber}&limit=${this.limit}`)
+    return this.http.get(`${this.apiUrl}?page=${this.pageNumber}&limit=${this.limit}&keyword=${keyword}`)
   }
 
   deleteOrder(id: string) {
