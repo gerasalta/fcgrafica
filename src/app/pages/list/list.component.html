@@ -179,8 +179,23 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteOrder(i)"><i
-                        class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" data-bs-target="#alert" data-bs-toggle="modal"><i class="fa-solid fa-trash-can"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="alert" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal-content text-center">
+                  <div class="modal-header bg-danger d-flex justify-content-center">
+                    <p class="text-white display-1 mb-0"><i class="fa-solid fa-triangle-exclamation"></i></p>
+                  </div>
+                  <div class="modal-body">
+                    <h5 class="text-secondary">Se Borrará El Pedido De ({{order.clientData.company}}) Permanentemente</h5>
+                    <h3 class="text-dark">¿Estas Seguro?</h3>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center ">
+                    <div class="btn btn-outline-danger fw-bold w-25" type="button" data-bs-dismiss="modal" data-bs-toggle="modal"(click)="deleteOrder(i)">Si</div>
                   </div>
                 </div>
               </div>
