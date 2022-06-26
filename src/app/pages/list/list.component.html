@@ -12,10 +12,10 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Company</th>
-            <th scope="col">Material</th>
-            <th scope="col">Total</th>
-            <th scope="col">Anticipo</th>
-            <th scope="col">Saldo</th>
+            <th scope="col" class="hidden-sm">Material</th>
+            <th scope="col" class="hidden-sm">Total</th>
+            <th scope="col" class="hidden-sm">Anticipo</th>
+            <th scope="col" class="hidden-sm">Saldo</th>
             <th scope="col">Opciones</th>
           </tr>
         </thead>
@@ -25,25 +25,21 @@
               <td>{{order.clientData.name}}</td>
               <td>{{order.clientData.lastName}}</td>
               <td>{{order.clientData.company}}</td>
-              <td>{{order.orderData.arrOrders[0].material}}</td>
-              <td>$ {{order.balanceData.total}}</td>
-              <td>$ {{order.balanceData.warranty}}</td>
-              <td>$ {{order.balanceData.balance}}</td>
-              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i
-                    class="fa-solid fa-circle-info"></i></button></td>
+              <td class="hidden-sm">{{order.orderData.arrOrders[0].material}}</td>
+              <td class="hidden-sm">$ {{order.balanceData.total}}</td>
+              <td class="hidden-sm">$ {{order.balanceData.warranty}}</td>
+              <td class="hidden-sm">$ {{order.balanceData.balance}}</td>
+              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i class="fa-solid fa-circle-info"></i></button></td>
             </tr>
             <div class="modal fade" id="modal{{i}}" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                   <div class="modal-header d-flex flex-column">
-                    <h3 class="modal-title">{{order.clientData.company}} ({{order.clientData.name}}
-                      {{order.clientData.lastName}})</h3>
-                    <h5 class="modal-title text-secondary"><i class="fa-solid fa-phone"></i> {{order.clientData.phone}}
-                      <i class="fa-solid fa-location-dot"></i> {{order.clientData.email}} <i
-                        class="fa-solid fa-envelope"></i> {{order.clientData.address}}
+                    <h3 class="modal-title">{{order.clientData.company}} ({{order.clientData.name}} {{order.clientData.lastName}})</h3>
+                    <h5 class="modal-title text-secondary"><i class="fa-solid fa-phone"></i> {{order.clientData.phone}} <i class="fa-solid fa-envelope"></i> {{order.clientData.email}} <i class="fa-solid fa-location-dot"></i> {{order.clientData.address}}
                     </h5>
                   </div>
-                  <div class="modal-body">
+                  <div class="modal-body hidden-sm">
                     <table class="table">
                       <thead class="table-dark">
                         <tr>
@@ -98,15 +94,17 @@
                         </ng-container>
                       </tbody>
                       <thead class="table bg-soft">
-                        <tr>
-                          <th></th>
-                          <th>Fecha De Entrega</th>
-                          <th>Descuento</th>
-                          <th>Anticipo</th>
-                          <th>Subtotal</th>
-                          <th>Total</th>
-                          <th>Saldo</th>
-                        </tr>
+                        <ng-container>
+                          <tr>
+                            <th></th>
+                            <th>Fecha De Entrega</th>
+                            <th>Descuento</th>
+                            <th>Anticipo</th>
+                            <th>Subtotal</th>
+                            <th>Total</th>
+                            <th>Saldo</th>
+                          </tr>
+                        </ng-container>
                       </thead>
                       <tbody>
                         <tr>
@@ -121,6 +119,22 @@
                       </tbody>
                     </table>
                   </div>
+                  <div class="modal-body hidden-min-sm">
+                    <ng-container *ngFor="let item of order.orderData.arrOrders, let position = index" [ngSwitch]="item.material">
+                      <ul class="list-group my-2" *ngSwitchCase="'vinyl'">
+                        <li class="list-group-item">{{item.material}} ({{item.width}} x {{item.height}}) ${{item.partialAmount}}</li>
+                      </ul>
+                      <ul class="list-group my-2" *ngSwitchCase="'banner'">
+                        <li class="list-group-item">{{item.material}} ({{item.width}} x {{item.height}}) ${{item.partialAmount}}</li>
+                      </ul>
+                      <ul class="list-group my-2" *ngSwitchCase="'light'">
+                        <li class="list-group-item">{{item.lightMaterial}} ({{item.meters}} metro/s) ${{item.partialAmount}}</li>
+                      </ul>
+                      <ul class="list-group my-2" *ngSwitchCase="'polyfan'">
+                        <li class="list-group-item">{{item.material}} ({{item.units}} placa/s) ${{item.partialAmount}}</li>
+                      </ul>
+                    </ng-container>
+                  </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteOrder(i)"><i
@@ -130,19 +144,23 @@
               </div>
             </div>
           </ng-container>
-
         </tbody>
       </table>
     </div>
-    <div *ngIf="spinner" class="row d-flex justify-content-center m-3">
+  </div>
+  <div class="row">
+    <nav class="my-3">
+      <ul class="pagination d-flex justify-content-center">
+        <button class="btn btn-soft mx-1" [disabled]="!prevPage" (click)="turnPage(-1)"><i
+            class="fa-solid fa-caret-left"></i></button>
+        <button class="btn btn-soft mx-1" [disabled]="!nextPage" (click)="turnPage(+1)"><i
+            class="fa-solid fa-caret-right"></i></button>
+      </ul>
+    </nav>
+    <div *ngIf="spinner" class="d-flex justify-content-center m-3">
       <div class="spinner-border text-dark" role="status">
         <span class="sr-only"></span>
       </div>
     </div>
-    <nav class="row m-3" aria-label="...">
-      <ul class="pagination justify-content-center">
-        <button class="btn btn-soft mx-1"[disabled]="!prevPage" (click)="turnPage(-1)"><i class="fa-solid fa-caret-left"></i></button>
-        <button class="btn btn-soft mx-1"[disabled]="!nextPage" (click)="turnPage(+1)"><i class="fa-solid fa-caret-right"></i></button>
-      </ul>
-    </nav>
   </div>
+</div>
