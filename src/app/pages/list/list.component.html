@@ -36,12 +36,12 @@
                 <div class="modal-content">
                   <div class="col modal-header d-flex flex-column">
                     <div class="row">
-                        <h2 class="mb-0">{{order.clientData.company}}</h2>
+                        <h2 class="mb-1">{{order.clientData.company}}</h2>
                     </div>
                     <div class="row">
-                        <h5 class="text-secondary mb-0">({{order.clientData.name}} {{order.clientData.lastName}})</h5>
+                        <h5 class="text-secondary mb-1">({{order.clientData.name}} {{order.clientData.lastName}})</h5>
                     </div>
-                    <div class="row">
+                    <div class="row text-center-cellphone">
                         <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap"><i class="fa-solid fa-location-dot"></i> {{order.clientData.address}}</p>
                         <p class="col text-secondary text-uppercase mb-0 p-1 hidden-sm fw-bold text-nowrap"><i class="fa-solid fa-envelope"></i> {{order.clientData.email}}</p>
                         <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap "><i class="fa-solid fa-mobile-screen-button"></i> {{order.clientData.phone}}</p>
@@ -126,6 +126,9 @@
                         </tr>
                       </tbody>
                     </table>
+                    <div class="row alert bg-soft mx-1" role="alert">
+                      {{order.orderData.description}}
+                    </div>
                   </div>
                   <div class="modal-body hidden-min-sm">
                     <table class="table">
@@ -176,6 +179,9 @@
                         </tr>
                       </tbody>
                     </table>
+                    <div class="row alert bg-soft mx-1" role="alert">
+                      {{order.orderData.description}}
+                    </div>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>

@@ -26,7 +26,7 @@ export class ListComponent implements OnInit {
   }
 
   getOrders(){
-    this.pagination = []
+    this.pagination = [];
     this.spinner = true;
     this.db.getOrders(this.actualPage, this.keyword.value)
     .subscribe({
