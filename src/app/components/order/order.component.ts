@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit {
 		description: new FormControl('')
 	});
 
+	prices: any = {};
 	orders: FormArray = this.form.get('arrOrders') as FormArray;
 	showDescription: boolean = false;
 
@@ -26,7 +27,7 @@ export class OrderComponent implements OnInit {
 	constructor(private db: DatabaseService) { }
 
 	ngOnInit(): void {
-		this.send();
+		this.getPrices();
 		this.emitter.emit(this.form);
 		this.addOrder();
 	}
@@ -56,17 +57,22 @@ export class OrderComponent implements OnInit {
 		this.orders?.push(newOrder);
 	}
 
+	getPrices(){
+		this.db.getPrices()
+		.subscribe((data:any) => {this.prices = data, this.send()})
+	};	
+
 	calculateAmount() {
-		let arr = this.orders.controls
+		let arr = this.orders.controls;
 		for (let order of arr) {
 			if (order.get('material')?.value === 'vinyl') {
-				let material = this.db.getPrice(order.get('material')?.value)
+				let material = this.prices[order.get('material')?.value]
 				let additional = material[order.get('plotter')?.value] + material[order.get('materialType')?.value] + material[order.get('additionalService')?.value]
 				let amount = order.get('width')?.value * order.get('height')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 			}
 			if (order.get('material')?.value === 'banner') {
-				let material = this.db.getPrice(order.get('material')?.value)
+				let material = this.prices[order.get('material')?.value]
 				if (order.get('additionalMaterial')?.value === 'tensioner' || order.get('additionalMaterial')?.value === 'doubleTensioner' || order.get('additionalMaterial')?.value === 'rollUp') {
 					order.get('width')?.setValue(0.9, { emitEvent: false })
 					order.get('height')?.setValue(1.9, { emitEvent: false })
@@ -81,13 +87,13 @@ export class OrderComponent implements OnInit {
 				}
 			}
 			if (order.get('material')?.value === 'light') {
-				let material = this.db.getPrice(order.get('material')?.value)
+				let material = this.prices[order.get('material')?.value]
 				let additional = material[order.get('lightMaterial')?.value]
 				let amount = order.get('meters')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 			}
 			if (order.get('material')?.value === 'polyfan') {
-				let material = this.db.getPrice(order.get('material')?.value)
+				let material = this.prices[order.get('material')?.value]
 				let additional = material[order.get('thickness')?.value] + material[order.get('additionalMaterial')?.value] + material[order.get('additionalService')?.value]
 				let amount = order.get('units')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })

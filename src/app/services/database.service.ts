@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DatabaseService {
 
-  apiUrl: string = 'https://backend-fc.herokuapp.com/api/orders'
+  apiUrl: string = 'https://backend-fc.herokuapp.com/api'
   pageNumber: number = 1;
   limit: number = 8;
 
@@ -58,17 +58,21 @@ export class DatabaseService {
     return this.price[material]
   }
 
+  getPrices(){
+    return this.http.get(`${this.apiUrl}/prices`)
+  }
+
   postOrder(order: any) {
-    return this.http.post(this.apiUrl, order)
+    return this.http.post(`${this.apiUrl}/orders`, order)
   }
 
   getOrders(pageNumber: number, keyword: string) {
     this.pageNumber = pageNumber
-    return this.http.get(`${this.apiUrl}?page=${this.pageNumber}&limit=${this.limit}&keyword=${keyword}`)
+    return this.http.get(`${this.apiUrl}/orders?page=${this.pageNumber}&limit=${this.limit}&keyword=${keyword}`)
   }
 
   deleteOrder(id: string) {
-    return this.http.delete(`${this.apiUrl}/${id}`)
+    return this.http.delete(`${this.apiUrl}/orders/${id}`)
   }
 
 }

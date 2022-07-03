@@ -60,9 +60,7 @@ export class formComponent implements OnInit {
 
   confirm() {
     this.db.postOrder(this.form.value)
-      .subscribe(
-        { next: data => console.log(data) }
-      )
+      .subscribe()
     this.form.reset(this.initialValue)
     this.resetOrders()
   }
