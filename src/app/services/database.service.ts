@@ -29,8 +29,8 @@ export class DatabaseService {
     return this.http.delete(`${this.apiUrl}/orders/${id}`)
   }
 
-  updatePrice(material: string, service: string, updatePack: string){
-    return this.http.put(`${this.apiUrl}/prices?material=${material}&service=${service}`, updatePack)
+  updatePrice(updatePack: string){
+    return this.http.put(`${this.apiUrl}/prices`, updatePack)
   }
 
 }

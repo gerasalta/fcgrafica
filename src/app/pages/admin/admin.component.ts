@@ -42,8 +42,8 @@ export class AdminComponent implements OnInit {
   }
 
   updatePrice(){
-   this.updatePack = `{${this.service.value}:${this.newPrice.value}}`;
-    this.db.updatePrice(this.material.value, this.service.value, this.updatePack)
+   this.updatePack = `{${this.material.value}.${this.service.value}:${this.newPrice.value}}`;
+    this.db.updatePrice(this.updatePack)
     .subscribe({
       next: data => console.log(data),
       error: err => console.log(err)      
