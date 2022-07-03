@@ -5,13 +5,15 @@ import { ComponentsModule } from '../components/components.module';
 import { formComponent } from './form/form.component';
 import { ListComponent } from './list/list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminComponent } from './admin/admin.component';
 
 
 
 @NgModule({
   declarations: [
     formComponent,
-    ListComponent
+    ListComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,
