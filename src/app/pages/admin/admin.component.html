@@ -1,5 +1,44 @@
 <div class="container mt-3">
+    <div class="row  mb-3">
+        <div class="col-lg-6 border rounded p-3">
+            <div class="row">
+                <h3 class="text-center text-secondary mb-3">ACTUALIZAR PRECIO</h3>
+                <div class="col-lg-3 mb-3">
+                    <select name="material" class="form-select" [formControl]="material">
+                        <option value="vinyl">Vinilo</option>
+                        <option value="banner">Lona</option>
+                        <option value="light">Luces</option>
+                        <option value="polyfan">Polifan</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 mb-3">
+                    <select name="plotter" class="form-select" [formControl]="service">
+                        <option value="print">Impreso</option>
+                        <option value="cut">Corte</option>
+                        <option value="mix">Mixto</option>
+                        <option value="glossy">Brillante</option>
+                        <option value="mate">Mate</option>
+                        <option value="perforated">Microperforado</option>
+                        <option value="frosted">Esmerilado</option>
+                        <option value="justMaterial">Sin Instalar</option>
+                        <option value="install">Instalar</option>
+                        <option value="removeInstall">Remover/Instalar</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control" [formControl]="newPrice">
+                    </div>
+                </div>
+                <div class="col-lg-2 mb-3 text-center">
+                    <button type="button" class="btn btn-success w-100" (click)="updatePrice()"><i class="fa-solid fa-upload"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row  border rounded p-3 mb-3">
+        <h3 class="text-center text-secondary mb-3">LISTA DE PRECIOS</h3>
         <div class="col">
             <ng-container [ngSwitch]="page">
                 <table class="table table-sm" *ngSwitchCase="1">
@@ -232,11 +271,11 @@
     <div class="row">
         <nav class="my-3">
             <ul class="pagination d-flex justify-content-center">
-              <button class="btn btn-soft mx-1" [disabled]="prevPage" (click)="turnPage(-1)"><i
-                  class="fa-solid fa-caret-left"></i></button>
-              <button class="btn btn-soft mx-1" [disabled]="nextPage" (click)="turnPage(+1)"><i
-                  class="fa-solid fa-caret-right"></i></button>
+                <button class="btn btn-soft mx-1" [disabled]="prevPage" (click)="turnPage(-1)"><i
+                        class="fa-solid fa-caret-left"></i></button>
+                <button class="btn btn-soft mx-1" [disabled]="nextPage" (click)="turnPage(+1)"><i
+                        class="fa-solid fa-caret-right"></i></button>
             </ul>
-          </nav>
+        </nav>
     </div>
 </div>
