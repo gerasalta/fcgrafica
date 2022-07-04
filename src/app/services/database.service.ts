@@ -30,7 +30,7 @@ export class DatabaseService {
   }
 
   updatePrice(updatePack: string){
-    return this.http.put(`${this.apiUrl}/prices`, updatePack)
+    return this.http.put(`${this.apiUrl}/prices`, JSON.parse(updatePack))
   }
 
 }
