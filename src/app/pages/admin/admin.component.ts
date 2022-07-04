@@ -9,12 +9,13 @@ import { DatabaseService } from 'src/app/services/database.service';
 })
 export class AdminComponent implements OnInit {
 
+  spinner: boolean = true;
   page: number = 1;
   prevPage: boolean = false;
   nextPage: boolean = false;
   material: FormControl = new FormControl('vinyl');
   service: FormControl = new FormControl('print');
-  newPrice: FormControl = new FormControl(0 );
+  newPrice: FormControl = new FormControl(0);
   updatePack: string = "";
 
   constructor(private db: DatabaseService) { }
@@ -26,25 +27,33 @@ export class AdminComponent implements OnInit {
     this.getPrices()
   }
 
-  getPrices(){
+  getPrices() {
     this.db.getPrices()
-    .subscribe(data => this.prices = data)
+      .subscribe({
+        next: data => this.prices = data,
+        error: err => console.log(err),
+        complete: ()=>{this.spinner = false}
+      })
   }
 
-  turnPage(page: number){
+  turnPage(page: number) {
     this.page += page
     this.disabledPagintion()
   }
 
-  disabledPagintion(){
+  disabledPagintion() {
     this.page === 1 ? this.prevPage = true : this.prevPage = false;
     this.page === 3 ? this.nextPage = true : this.nextPage = false;
   }
 
-  updatePrice(){
-   this.updatePack = `{"${this.material.value}.${this.service.value}":${this.newPrice.value}}`;
+  updatePrice() {
+    this.updatePack = `{"${this.material.value}.${this.service.value}":${this.newPrice.value}}`;
     this.db.updatePrice(this.updatePack)
-    .subscribe(()=>{this.getPrices()})
+      .subscribe({
+        next: () => { this.getPrices()},
+        error: err => console.log(err),
+        complete: () => { this.spinner = false }
+      })
   }
 
 }

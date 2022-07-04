@@ -5,25 +5,51 @@
                 <h3 class="text-center text-secondary mb-3">ACTUALIZAR PRECIO</h3>
                 <div class="col-lg-3 mb-3">
                     <select name="material" class="form-select" [formControl]="material">
-                        <option value="vinyl">Vinilo</option>
+                        <option selected value="vinyl">Vinilo</option>
                         <option value="banner">Lona</option>
                         <option value="light">Luces</option>
                         <option value="polyfan">Polifan</option>
                     </select>
                 </div>
                 <div class="col-lg-3 mb-3">
-                    <select name="plotter" class="form-select" [formControl]="service">
-                        <option value="print">Impreso</option>
-                        <option value="cut">Corte</option>
-                        <option value="mix">Mixto</option>
-                        <option value="glossy">Brillante</option>
-                        <option value="mate">Mate</option>
-                        <option value="perforated">Microperforado</option>
-                        <option value="frosted">Esmerilado</option>
-                        <option value="justMaterial">Sin Instalar</option>
-                        <option value="install">Instalar</option>
-                        <option value="removeInstall">Remover/Instalar</option>
-                    </select>
+                    <ng-container [ngSwitch]="material.value">
+                        <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'vinyl'">
+                            <option selected value="print">Impreso</option>
+                            <option value="cut">Corte</option>
+                            <option value="mix">Mixto</option>
+                            <option value="glossy">Brillante</option>
+                            <option value="mate">Mate</option>
+                            <option value="perforated">Microperforado</option>
+                            <option value="frosted">Esmerilado</option>
+                            <option value="justMaterial">Sin Instalar</option>
+                            <option value="install">Instalar</option>
+                            <option value="removeInstall">Remover/Instalar</option>
+                        </select>
+                        <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'light'">
+                            <option selected value="neon">Neon</option>
+                            <option value="led">Led</option>
+                        </select>
+                        <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'banner'">
+                            <option selected value="eyelets">C/ Hojales</option>
+                            <option value="hangingBanner">Bolsillos</option>
+                            <option value="tensioner">Tensor</option>
+                            <option value="doubleTensioner">Doble Tensor</option>
+                            <option value="rollUp">Roll Up</option>
+                            <option value="structuralIron">Estructural</option>
+                            <option value="bright">Luminoso</option>
+                            <option value="mate">Mate</option>
+                            <option value="back">Back</option>
+                            <option value="install">Instalar</option>
+                            <option value="removeInstall">Remover/Instalar</option>
+                        </select>
+                        <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'polyfan'">
+                            <option selected value="20">20mm</option>
+                            <option value="25">25mm</option>
+                            <option value="30">30mm</option>
+                            <option value="print">Pintura</option>
+                            <option value="install">Instalar</option>
+                        </select>
+                    </ng-container>
                 </div>
                 <div class="col-lg-4 mb-3">
                     <div class="input-group">
@@ -32,7 +58,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2 mb-3 text-center">
-                    <button type="button" class="btn btn-success w-100" (click)="updatePrice()"><i class="fa-solid fa-upload"></i></button>
+                    <button type="button" class="btn btn-success w-100" (click)="updatePrice()"><i class="fa-solid fa-floppy-disk"></i></button>
                 </div>
             </div>
         </div>
@@ -277,5 +303,10 @@
                         class="fa-solid fa-caret-right"></i></button>
             </ul>
         </nav>
+        <div *ngIf="spinner" class="d-flex justify-content-center m-b">
+            <div class="spinner-border text-dark" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </div>
     </div>
 </div>
