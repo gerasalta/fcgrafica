@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   getPrices() {
     this.db.getPrices()
       .subscribe({
-        next: data => this.prices = data,
+        next: (data:any) => {this.prices = data; console.log(data.polyfan.print)},
         error: err => console.log(err),
         complete: ()=>{this.spinner = false}
       })
@@ -47,6 +47,7 @@ export class AdminComponent implements OnInit {
   }
 
   updatePrice() {
+    this.spinner = true;
     this.updatePack = `{"${this.material.value}.${this.service.value}":${this.newPrice.value}}`;
     this.db.updatePrice(this.updatePack)
       .subscribe({
@@ -55,5 +56,4 @@ export class AdminComponent implements OnInit {
         complete: () => { this.spinner = false }
       })
   }
-
 }

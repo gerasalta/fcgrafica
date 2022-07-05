@@ -43,9 +43,9 @@
                             <option value="removeInstall">Remover/Instalar</option>
                         </select>
                         <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'polyfan'">
-                            <option selected value="20">20mm</option>
-                            <option value="25">25mm</option>
-                            <option value="30">30mm</option>
+                            <option selected value="extraSmall">20mm</option>
+                            <option value="small">25mm</option>
+                            <option value="medium">30mm</option>
                             <option value="print">Pintura</option>
                             <option value="install">Instalar</option>
                         </select>
@@ -64,8 +64,8 @@
         </div>
     </div>
     <div class="row  border rounded p-3 mb-3">
-        <h3 class="text-center text-secondary mb-3">LISTA DE PRECIOS</h3>
         <div class="col">
+            <h3 class="text-center text-secondary mb-3">LISTA DE PRECIOS</h3>
             <ng-container [ngSwitch]="page">
                 <table class="table table-sm" *ngSwitchCase="1">
                     <tbody>
@@ -237,19 +237,19 @@
                             <th scope="row"></th>
                             <td></td>
                             <td>20mm</td>
-                            <td>${{prices.polyfan.thickness}}</td>
+                            <td>${{prices.polyfan.extraSmall}}</td>
                         </tr>
                         <tr class="bg-soft">
                             <th scope="row"></th>
                             <td></td>
                             <td>25mm</td>
-                            <td>${{prices.polyfan.thickness}}</td>
+                            <td>${{prices.polyfan.small}}</td>
                         </tr>
                         <tr class="bg-soft">
                             <th scope="row"></th>
                             <td></td>
                             <td>30mm</td>
-                            <td>${{prices.polyfan.thickness}}</td>
+                            <td>${{prices.polyfan.medium}}</td>
                         </tr>
                         <tr>
                             <th scope="row"></th>
@@ -281,13 +281,13 @@
                             <th scope="row"></th>
                             <td></td>
                             <td>Neon</td>
-                            <td>$2000</td>
+                            <td>${{prices.light.neon}}</td>
                         </tr>
                         <tr class="bg-soft">
                             <th scope="row"></th>
                             <td></td>
                             <td>Led</td>
-                            <td>$2000</td>
+                            <td>${{prices.light.led}}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -48,7 +48,7 @@ export class OrderComponent implements OnInit {
 			additionalService: new FormControl('justMaterial'),
 			meters: new FormControl(0),
 			colours: new FormControl('white'),
-			thickness: new FormControl(20),
+			thickness: new FormControl('extraSmall'),
 			units: new FormControl(0),
 			print: new FormControl('false'),
 			partialAmount: new FormControl(0),
