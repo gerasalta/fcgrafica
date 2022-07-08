@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { OrderComponent } from 'src/app/components/order/order.component';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { DatabaseService } from 'src/app/services/database.service';
   styleUrls: ['./form.component.scss']
 })
 export class formComponent implements OnInit {
+
+  @ViewChild('description') description: OrderComponent;
 
   form: FormGroup = new FormGroup({
     clientData: new FormGroup({
@@ -67,6 +70,7 @@ export class formComponent implements OnInit {
 
   resetForm() {
     this.form.reset(this.initialValue)
+    this.description.showDescription = false;
     this.resetOrders()
   }
 
@@ -77,6 +81,7 @@ export class formComponent implements OnInit {
 
   getData(data: any) {
     this.form.setControl('orderData', data)
+    console.log();
   }
 
   calculateAmount() {

@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { DatabaseService } from 'src/app/services/database.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { DatabaseService } from 'src/app/services/database.service';
 
 export class OrderComponent implements OnInit {
 
-	@Output() emitter = new EventEmitter();
+	@Output() emitter = new EventEmitter<any>();
 	form: FormGroup = new FormGroup({
 		arrOrders: new FormArray([]),
 		description: new FormControl('')
@@ -34,7 +34,6 @@ export class OrderComponent implements OnInit {
 
 	openDescription() {
 		this.showDescription === false ? this.showDescription = true : this.showDescription = false
-		console.log(this.form.value)
 	}
 
 	addOrder() {
@@ -108,7 +107,6 @@ export class OrderComponent implements OnInit {
 
 	send() {
 		this.orders.valueChanges
-			.subscribe(() => { this.calculateAmount(), this.emitter.emit(this.form) })
+			.subscribe(() => { this.calculateAmount(), this.emitter.emit(this.form)})
 	}
-
 }
