@@ -9,7 +9,7 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-
+  
   orders: any = [];
   spinner: boolean = false;
   pagination: any[] = [];

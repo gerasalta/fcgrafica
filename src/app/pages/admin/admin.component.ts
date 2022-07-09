@@ -34,7 +34,7 @@ export class AdminComponent implements OnInit {
         complete: ()=>{this.spinner = false}
       })
   }
-
+  
   turnPage(page: number) {
     this.page += page
     this.disabledPagintion()
