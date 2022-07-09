@@ -17,10 +17,9 @@ export class AdminComponent implements OnInit {
   service: FormControl = new FormControl('print');
   newPrice: FormControl = new FormControl(0);
   updatePack: string = "";
+  prices: any = {vinyl : {cut: ''}};
 
   constructor(private db: DatabaseService) { }
-
-  prices: any = {};
 
   ngOnInit(): void {
     this.disabledPagintion()
@@ -30,7 +29,7 @@ export class AdminComponent implements OnInit {
   getPrices() {
     this.db.getPrices()
       .subscribe({
-        next: (data:any) => {this.prices = data; console.log(data.polyfan.print)},
+        next: (data:any) => {this.prices = data},
         error: err => console.log(err),
         complete: ()=>{this.spinner = false}
       })
