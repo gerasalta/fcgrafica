@@ -44,10 +44,10 @@ export class AdminComponent implements OnInit {
 
   updatePrice() {
     this.spinner = true;
-    this.updatePack = `{"${this.material.value}.${this.service.value}":${this.newPrice.value}}`;
+    this.updatePack = `{"${this.material.value}.${this.service.value}.price":${this.newPrice.value}}`;
     this.db.updatePrice(this.updatePack)
       .subscribe({
-        next: () => { this.getPrices()},
+        next: () => { this.getPrices(); console.log(this.prices)},
         error: err => console.log(err),
         complete: () => { this.spinner = false }
       })
