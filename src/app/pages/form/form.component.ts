@@ -49,7 +49,7 @@ export class formComponent implements OnInit {
       warranty: new FormControl(0),
       balance: new FormControl(0),
       discount: new FormControl(0),
-      date: new FormControl(new Date),
+      date: new FormControl(''),
     })
   })
 

@@ -66,7 +66,7 @@ export class OrderComponent implements OnInit {
 		for (let order of arr) {
 			if (order.get('material')?.value === 'vinyl') {
 				let material = this.prices[order.get('material')?.value]
-				let additional = material[order.get('plotter')?.value] + material[order.get('materialType')?.value] + material[order.get('additionalService')?.value]
+				let additional = material[order.get('plotter')?.value].price + material[order.get('materialType')?.value].price + material[order.get('additionalService')?.value].price
 				let amount = order.get('width')?.value * order.get('height')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 			}
@@ -75,25 +75,25 @@ export class OrderComponent implements OnInit {
 				if (order.get('additionalMaterial')?.value === 'tensioner' || order.get('additionalMaterial')?.value === 'doubleTensioner' || order.get('additionalMaterial')?.value === 'rollUp') {
 					order.get('width')?.setValue(0.9, { emitEvent: false })
 					order.get('height')?.setValue(1.9, { emitEvent: false })
-					let additional =  material[order.get('materialType')?.value] + material[order.get('additionalService')?.value]
+					let additional =  material[order.get('materialType')?.value].price + material[order.get('additionalService')?.value].price
 					let amount = order.get('width')?.value * order.get('height')?.value * additional + material[order.get('additionalMaterial')?.value]
 					order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 				}
 				else {
-					let additional = material[order.get('additionalMaterial')?.value] + material[order.get('materialType')?.value] + material[order.get('additionalService')?.value]
+					let additional = material[order.get('additionalMaterial')?.value].price + material[order.get('materialType')?.value].price + material[order.get('additionalService')?.value].price
 					let amount = order.get('width')?.value * order.get('height')?.value * additional
 					order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 				}
 			}
 			if (order.get('material')?.value === 'light') {
 				let material = this.prices[order.get('material')?.value]
-				let additional = material[order.get('lightMaterial')?.value]
+				let additional = material[order.get('lightMaterial')?.value].price
 				let amount = order.get('meters')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 			}
 			if (order.get('material')?.value === 'polyfan') {
 				let material = this.prices[order.get('material')?.value]
-				let additional = material[order.get('thickness')?.value] + material[order.get('additionalMaterial')?.value] + material[order.get('additionalService')?.value]
+				let additional = material[order.get('thickness')?.value].price + material[order.get('additionalMaterial')?.value].price + material[order.get('additionalService')?.value].price
 				let amount = order.get('units')?.value * additional
 				order.get('partialAmount')?.setValue(amount, { emitEvent: false })
 			}

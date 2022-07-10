@@ -10,39 +10,36 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class AdminComponent implements OnInit {
 
   spinner: boolean = true;
-  page: number = 1;
-  prevPage: boolean = false;
-  nextPage: boolean = false;
   material: FormControl = new FormControl('vinyl');
   service: FormControl = new FormControl('print');
   newPrice: FormControl = new FormControl(0);
   updatePack: string = "";
-  prices: any = {vinyl : {cut: ''}};
+  prices: any = [];
+  materials: any = [];
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
-    this.disabledPagintion()
     this.getPrices()
   }
 
   getPrices() {
+    this.prices.length = 0;
     this.db.getPrices()
       .subscribe({
-        next: (data:any) => {this.prices = data},
+        next: (data:any) => {
+          delete data._id
+          this.materials = Object.keys(data);
+          this.materials.forEach((material) => {
+            let services = Object.keys(data[material])
+            let objServices = {service: [], name: material}
+            services.forEach(service => {objServices.service.push(data[material][service])})
+            this.prices.push(objServices)
+          });
+        },
         error: err => console.log(err),
         complete: ()=>{this.spinner = false}
       })
-  }
-  
-  turnPage(page: number) {
-    this.page += page
-    this.disabledPagintion()
-  }
-
-  disabledPagintion() {
-    this.page === 1 ? this.prevPage = true : this.prevPage = false;
-    this.page === 3 ? this.nextPage = true : this.nextPage = false;
   }
 
   updatePrice() {
