@@ -3,7 +3,7 @@
         <div class="col-lg-6">
             <div class="row border rounded p-3 mb-3">
                 <h3 class="text-center text-secondary mb-3">ACTUALIZAR PRECIO</h3>
-                <div class="col-lg-3">
+                <div class="col-lg-3 my-2">
                     <select name="material" class="form-select" [formControl]="material">
                         <option selected value="vinyl">Vinilo</option>
                         <option value="banner">Lona</option>
@@ -11,7 +11,7 @@
                         <option value="polyfan">Polifan</option>
                     </select>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 my-2">
                     <ng-container [ngSwitch]="material.value">
                         <select name="plotter" class="form-select" [formControl]="service" *ngSwitchCase="'vinyl'">
                             <option selected value="print">Impreso</option>
@@ -37,6 +37,7 @@
                             <option value="rollUp">Roll Up</option>
                             <option value="structuralIron">Estructural</option>
                             <option value="bright">Luminoso</option>
+                            <option value="glossy">Brillante</option>
                             <option value="mate">Mate</option>
                             <option value="back">Back</option>
                             <option value="install">Instalar</option>
@@ -51,13 +52,13 @@
                         </select>
                     </ng-container>
                 </div>
-                <div class="col-lg-4 ">
+                <div class="col-lg-4 my-2">
                     <div class="input-group">
                         <span class="input-group-text">$</span>
                         <input class="form-control" [formControl]="newPrice">
                     </div>
                 </div>
-                <div class="col-lg-2 text-center">
+                <div class="col-lg-2 text-center my-2">
                     <button type="button" class="btn btn-success w-100" (click)="updatePrice()"><i
                             class="fa-solid fa-floppy-disk"></i></button>
                 </div>

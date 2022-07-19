@@ -33,7 +33,7 @@ export class ListComponent {
       next: (data:any) => {
         this.orders = data.docs;
         this.nextPage = data.hasNextPage;
-        this.prevPage = data.hasPrevPage;
+        this.prevPage = data.hasPrevPage;  
       },
       complete: () => this.spinner = false 
       })
