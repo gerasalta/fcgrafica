@@ -32,5 +32,9 @@ export class DatabaseService {
   updatePrice(updatePack: string){
     return this.http.put(`${this.apiUrl}/prices`, JSON.parse(updatePack))
   }
+
+  createDebotr(order: any){
+    return this.http.put(`${this.apiUrl}/debtors`, order)
+  }
   
 }

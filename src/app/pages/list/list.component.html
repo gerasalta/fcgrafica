@@ -29,22 +29,26 @@
               <td class="hidden-sm">$ {{order.balanceData.total}}</td>
               <td class="hidden-sm">$ {{order.balanceData.warranty}}</td>
               <td class="hidden-sm">$ {{order.balanceData.balance}}</td>
-              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i class="fa-solid fa-circle-info"></i></button></td>
+              <td><button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i
+                    class="fa-solid fa-circle-info"></i></button></td>
             </tr>
             <div class="modal fade" id="modal{{i}}" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                   <div class="col modal-header d-flex flex-column">
                     <div class="row">
-                        <h2 class="mb-1">{{order.clientData.company}}</h2>
+                      <h2 class="mb-1">{{order.clientData.company}}</h2>
                     </div>
                     <div class="row">
-                        <h5 class="text-secondary mb-1">({{order.clientData.name}} {{order.clientData.lastName}})</h5>
+                      <h5 class="text-secondary mb-1">({{order.clientData.name}} {{order.clientData.lastName}})</h5>
                     </div>
                     <div class="row text-center-cellphone">
-                        <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap"><i class="fa-solid fa-location-dot"></i> {{order.clientData.address}}</p>
-                        <p class="col text-secondary text-uppercase mb-0 p-1 hidden-sm fw-bold text-nowrap"><i class="fa-solid fa-envelope"></i> {{order.clientData.email}}</p>
-                        <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap "><i class="fa-solid fa-mobile-screen-button"></i> {{order.clientData.phone}}</p>
+                      <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap"><i
+                          class="fa-solid fa-location-dot"></i> {{order.clientData.address}}</p>
+                      <p class="col text-secondary text-uppercase mb-0 p-1 hidden-sm fw-bold text-nowrap"><i
+                          class="fa-solid fa-envelope"></i> {{order.clientData.email}}</p>
+                      <p class="col text-secondary text-uppercase mb-0 p-1 fw-bold text-nowrap "><i
+                          class="fa-solid fa-mobile-screen-button"></i> {{order.clientData.phone}}</p>
                     </div>
                   </div>
                   <div class="modal-body hidden-sm">
@@ -184,8 +188,12 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-success"><i class="fa-solid fa-check"></i></button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" [attr.data-bs-target]="'#alert'+i" data-bs-toggle="modal"><i class="fa-solid fa-trash-can"></i></button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                      [attr.data-bs-target]="'#debtor'+i" data-bs-toggle="modal"><i
+                        class="fa-solid fa-check"></i></button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                      [attr.data-bs-target]="'#alert'+i" data-bs-toggle="modal"><i
+                        class="fa-solid fa-trash-can"></i></button>
                   </div>
                 </div>
               </div>
@@ -201,7 +209,28 @@
                     <h3 class="text-dark">¿Estas Seguro?</h3>
                   </div>
                   <div class="modal-footer d-flex justify-content-center ">
-                    <div class="btn btn-outline-danger fw-bold w-25" type="button" data-bs-dismiss="modal" data-bs-toggle="modal"(click)="deleteOrder(i)">Si</div>
+                    <div class="btn btn-outline-danger fw-bold w-25" type="button" data-bs-dismiss="modal"
+                      data-bs-toggle="modal" (click)="deleteOrder(i)">Si</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="debtor{{i}}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal-content text-center">
+                  <div class="modal-header bg-warning d-flex justify-content-center">
+                    <p class="text-white display-1 mb-0"><i class="fa-solid fa-triangle-exclamation"></i></p>
+                  </div>
+                  <div class="modal-body">
+                    <h5 class="text-secondary">Saldo: ${{order.balanceData.balance}}</h5>
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input class="form-control" [formControl]="debt">
+                  </div>
+                  </div>
+                  <div class="modal-footer d-flex justify-content-center ">
+                    <div class="btn btn-outline-warning fw-bold w-25" type="button" data-bs-dismiss="modal"
+                      data-bs-toggle="modal" (click)="completeOrder(i)">Completar</div>
                   </div>
                 </div>
               </div>

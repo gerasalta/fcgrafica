@@ -17,6 +17,7 @@ export class ListComponent {
   nextPage: boolean = false;
   prevPage: boolean = false;
   keyword: FormControl = new FormControl("");
+  debt: FormControl = new FormControl();
 
   constructor(private db: DatabaseService) { }
 
@@ -42,7 +43,8 @@ export class ListComponent {
   deleteOrder(index: number){
     this.db.deleteOrder(this.orders[index]._id)
     .subscribe({
-      next: data => {this.getOrders()}
+      next: () => {this.getOrders()},
+      error: err => console.log(err)
     })
   }
 
@@ -57,4 +59,17 @@ export class ListComponent {
     .subscribe((data)=>{this.getOrders()});
   }
 
+  completeOrder(index: number){
+    if(this.debt.value < this.orders[index].balanceData.balance){
+      this.db.createDebotr(this.orders[index])
+      .subscribe({
+        next: data => this.deleteOrder(index),
+        error: err => console.log(err)
+      })
+    }
+    else{
+      this.deleteOrder(index)
+    }
+  
+  }
 }
