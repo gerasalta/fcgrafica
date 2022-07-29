@@ -1,6 +1,6 @@
 <div class="container mt-3">
     <div class="row mb-3">
-        <div class="col-lg-6">
+        <div class="col">
             <div class="row border rounded p-3 mb-3">
                 <h3 class="text-center text-secondary mb-3">ACTUALIZAR PRECIO</h3>
                 <div class="col-lg-3 my-2">
@@ -83,10 +83,42 @@
                     </table>
                 </ng-container>
             </div>
-        </div>
-        <div class="col-lg-6">
             <div class="row border rounded p-3 mb-3">
-                
+                <h3 class="text-center text-secondary mb-3">DEUDORES</h3>
+                <table class="table table-sm">
+                    <thead>
+                      <tr class="table-dark">
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Saldo</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="bg-soft" *ngFor="let debtor of debtors; let i = index">
+                        <td>{{debtor.clientData.company}}</td>
+                        <td>${{debtor.balanceData.total}}</td>
+                        <td>${{debtor.balanceData.balance}}</td>
+                        <button class="btn" type="button" data-bs-toggle="modal" [attr.data-bs-target]="'#modal'+i"><i class="fa-solid fa-circle-info"></i></button>
+                        <div class="modal fade" id="modal{{i}}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-md modal-dialog-centered">
+                              <div class="modal-content text-center">
+                                <div class="modal-header bg-danger d-flex justify-content-center">
+                                  <p class="text-white display-1 mb-0"><i class="fa-solid fa-triangle-exclamation"></i></p>
+                                </div>
+                                <div class="modal-body">
+                                  <h5 class="text-secondary">¿{{debtor.clientData.company}} canceló el saldo de ${{debtor.balanceData.balance}}?</h5>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center ">
+                                  <div class="btn btn-outline-danger fw-bold w-50" type="button" data-bs-dismiss="modal"
+                                    data-bs-toggle="modal" (click)="deleteDebtor(i)">Si</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </tr>
+                    </tbody>
+                  </table>  
             </div>
         </div>
     </div>

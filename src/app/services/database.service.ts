@@ -37,4 +37,8 @@ export class DatabaseService {
     return this.http.put(`${this.apiUrl}/debtors`, order)
   }
   
+  getDebotrs(){
+    return this.http.get(`${this.apiUrl}/debtors`)
+  }
+
 }

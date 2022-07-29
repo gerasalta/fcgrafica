@@ -60,8 +60,10 @@ export class ListComponent {
   }
 
   completeOrder(index: number){
-    if(this.debt.value < this.orders[index].balanceData.balance){
-      this.db.createDebotr(this.orders[index])
+    let order = this.orders[index]
+    if(this.debt.value < order.balanceData.balance){
+      order.balanceData.balance = order.balanceData.balance - this.debt.value
+      this.db.createDebotr(order)
       .subscribe({
         next: data => this.deleteOrder(index),
         error: err => console.log(err)

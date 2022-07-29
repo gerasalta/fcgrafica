@@ -16,11 +16,13 @@ export class AdminComponent implements OnInit {
   updatePack: string = "";
   prices: any = [];
   materials: any = [];
+  debtors: any[] = [];
 
   constructor(private db: DatabaseService) { }
 
   ngOnInit(): void {
     this.getPrices()
+    this.getDebtors()
   }
 
   getPrices() {
@@ -52,4 +54,18 @@ export class AdminComponent implements OnInit {
         complete: () => { this.spinner = false }
       })
   }
+
+  getDebtors(){
+    this.db.getDebotrs()
+    .subscribe({
+      next: (data: any) => {this.debtors = data}
+    })
+  }
+
+  deleteDebtor(index: number){
+    
+  }
+
+
+
 }
